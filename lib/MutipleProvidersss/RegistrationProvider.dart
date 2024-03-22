@@ -4,11 +4,13 @@ class RegistrationProvider extends ChangeNotifier {
   late TextEditingController nameController;
   late TextEditingController emailController;
   late TextEditingController passwordController;
+  late TextEditingController confirmpasswordController;
   late GlobalKey<FormState> formKey;
   RegistrationProvider() {
     nameController = TextEditingController();
     emailController = TextEditingController();
     passwordController = TextEditingController();
+
     formKey = GlobalKey<FormState>();
   }
   bool _isPasswordVisible = false;

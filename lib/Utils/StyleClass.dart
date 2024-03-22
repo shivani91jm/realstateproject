@@ -31,7 +31,7 @@ class StyleClass{
   );
   static  TextStyle textformstyle = TextStyle(
     fontFamily: FontFamilyClass.fontfamily,
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w300,
     fontSize: 15,
     color: GradientHelper.getColorFromHex(ColorClass.BLACK_COLOR),
     fontStyle: FontStyle.normal,

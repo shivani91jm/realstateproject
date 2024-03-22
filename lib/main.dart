@@ -1,10 +1,12 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:realstateproject/Activity/DashBoardPage.dart';
 import 'package:realstateproject/Activity/LoginPage.dart';
 import 'package:realstateproject/Activity/SignUpPage.dart';
 import 'package:realstateproject/Colors/ColorsClass.dart';
 import 'package:realstateproject/Colors/GradientHelper.dart';
+import 'package:realstateproject/MutipleProvidersss/BottomNavigationBarProvider.dart';
 
 import 'package:realstateproject/MutipleProvidersss/LoginProvider.dart';
 import 'package:realstateproject/MutipleProvidersss/RegistrationProvider.dart';
@@ -23,13 +25,14 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider<RegistrationProvider>(create: (_) => RegistrationProvider()),
           ChangeNotifierProvider<LoginProvider>(create:(_)=> LoginProvider()),
+          ChangeNotifierProvider<BottomNavigationBarProvider>(create:(_)=> BottomNavigationBarProvider()),
         ],
       child: MaterialApp(
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: GradientHelper.getColorFromHex(ColorClass.RED_COLOR)),
           useMaterial3: true,
         ),
-        home: LoginPages(),
+        home: Dashboard(),
       ),
     );
   }

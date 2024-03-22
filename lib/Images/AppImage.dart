@@ -1,4 +1,4 @@
-class AppImages{
+class AppImages {
   static const String m1_url = "assets/images/m1.png";
   static const String m2_url = "assets/images/m2.png";
   static const String m3_url = "assets/images/m3.png";
