@@ -26,4 +26,6 @@ class RegistrationProvider extends ChangeNotifier {
 
     }
    }
+
+
   }

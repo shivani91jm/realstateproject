@@ -2,15 +2,18 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:realstateproject/Activity/LoginPage.dart';
+import 'package:realstateproject/Activity/SignUpPage.dart';
+import 'package:realstateproject/Colors/ColorsClass.dart';
+import 'package:realstateproject/Colors/GradientHelper.dart';
 
 import 'package:realstateproject/MutipleProvidersss/LoginProvider.dart';
 import 'package:realstateproject/MutipleProvidersss/RegistrationProvider.dart';
 
 void main() {
- // runApp(const MyApp());
-  DevicePreview(
-    builder: (context) => MyApp(),
-  );
+  runApp(const MyApp());
+ //  DevicePreview(
+ //    builder: (context) => const MyApp(),
+ //  );
 }
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -23,10 +26,10 @@ class MyApp extends StatelessWidget {
         ],
       child: MaterialApp(
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          colorScheme: ColorScheme.fromSeed(seedColor: GradientHelper.getColorFromHex(ColorClass.RED_COLOR)),
           useMaterial3: true,
         ),
-        home: LoginPage(),
+        home: LoginPages(),
       ),
     );
   }

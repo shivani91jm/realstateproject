@@ -1,3 +1,3 @@
 class FontFamilyClass{
-  static const String   fontfamily= "Lexend";
+  static const String   fontfamily= "Lato";
 }

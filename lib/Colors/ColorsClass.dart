@@ -4,6 +4,7 @@ class ColorClass {
 
   static const String RED_COLOR = '#D8232A';
   static const String BLACK_COLOR = '#322F2F';
+  static const String lightGrey_COLOR = '#F5F4F8';
   static const Color whiteColors=Color(0xFFFFFFFF);
   static const Color blackColors=Color(0xFF0C0C0C);
   static const Color greyColors=Color(0xFFC0BBBB);

@@ -11,7 +11,7 @@ class RoutePages {
       case RouteNames.splash_screen:
         return MaterialPageRoute(builder: (_) => SplashScreenPage());
       case RouteNames.login_screen:
-        return MaterialPageRoute(builder: (_) => LoginPage());
+        return MaterialPageRoute(builder: (_) => LoginPages());
       case RouteNames.registration_screen:
         return MaterialPageRoute(builder: (_) => RegistrationPage());
       case RouteNames.dashboard_screen:
