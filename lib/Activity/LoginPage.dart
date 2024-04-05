@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:realstateproject/Activity/SignUpPage.dart';
 import 'package:realstateproject/Colors/ColorsClass.dart';
 import 'package:realstateproject/Colors/GradientHelper.dart';
 import 'package:realstateproject/Fonts/fontsclass.dart';
@@ -63,7 +64,7 @@ class _LoginPagesState extends State<LoginPages> {
                   Container(
                     margin: EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: GradientHelper.getColorFromHex(ColorClass.lightGrey_COLOR), // Light gray color
+                      color: GradientHelper.getColorFromHex(ColorClass.lightEditText), // Light gray color
                       borderRadius: BorderRadius.circular(8.0), // Optional: adds rounded corners
                     ),
                     child: Padding(
@@ -217,7 +218,12 @@ class _LoginPagesState extends State<LoginPages> {
                   ),
                   GestureDetector(
                     onTap: () async {
-
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => RegistrationPage(), // Navigate to your main screen
+                        ),
+                      );
                     },
                     child: Container(
                       child: Row(

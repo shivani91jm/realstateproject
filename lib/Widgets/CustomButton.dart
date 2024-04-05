@@ -23,7 +23,6 @@ class CustomButton extends StatelessWidget {
       ),
 
       child: Container(
-
         width: MediaQuery.of(context).size.width,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(5.0,3.0,5.0,3.0),
@@ -31,7 +30,7 @@ class CustomButton extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
                 color: ColorClass.whiteColors,
-                fontSize: 15,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: FontFamilyClass.fontfamily
             ),

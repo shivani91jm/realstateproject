@@ -5,7 +5,6 @@ class LoginProvider extends ChangeNotifier{
   late TextEditingController passwordController;
   late GlobalKey<FormState> formKey;
   LoginProvider() {
-
     emailController = TextEditingController();
     passwordController = TextEditingController();
     formKey = GlobalKey<FormState>();

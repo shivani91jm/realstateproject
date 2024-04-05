@@ -62,7 +62,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                Container(
                     margin: EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: GradientHelper.getColorFromHex(ColorClass.lightGrey_COLOR), // Light gray color
+                      color: GradientHelper.getColorFromHex(ColorClass.lightEditText), // Light gray color
                       borderRadius: BorderRadius.circular(8.0), // Optional: adds rounded corners
                     ),
                  child: Padding(
@@ -88,7 +88,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               Container(
                 margin: EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: GradientHelper.getColorFromHex(ColorClass.lightGrey_COLOR), // Light gray color
+                  color: GradientHelper.getColorFromHex(ColorClass.lightEditText), // Light gray color
                   borderRadius: BorderRadius.circular(8.0), // Optional: adds rounded corners
                 ),
                 child: Padding(

@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:realstateproject/Activity/IntroductionScreen.dart';
 import 'package:realstateproject/Colors/ColorsClass.dart';
 import 'package:realstateproject/Colors/GradientHelper.dart';
 import 'package:realstateproject/Fonts/fontsclass.dart';
@@ -13,10 +16,23 @@ class SplashScreenPage extends StatefulWidget {
 
 class _SplashScreenPageState extends State<SplashScreenPage> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Timer(
+        Duration(seconds: 3), // Adjust the duration as needed
+            () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => IntroducationScreen(), // Navigate to your main screen
+            ),
+          );
+  });
+  }
+  @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-
       body: Stack(
         fit: StackFit.expand,
         children: [
@@ -35,7 +51,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
             right: 0,
             bottom: 0,
             child: Container(
-              color: Colors.black.withOpacity(0.2), // Overlay color and opacity
+              color: GradientHelper.getColorFromHex(ColorClass.blue).withOpacity(0.2), // Overlay color and opacity
               child: Center(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -73,6 +89,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
                     ),
                     Container(
                       height: 50,
+                        width: 250,
                         margin: EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           color: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),

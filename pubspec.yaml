@@ -38,6 +38,7 @@ dependencies:
   http: any
   provider: any
   device_preview: any
+  flutter_onboarding_slider: any
 
 dev_dependencies:
   flutter_test:

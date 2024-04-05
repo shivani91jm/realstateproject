@@ -14,7 +14,7 @@ class PasswordField extends StatelessWidget {
         return Container(
           margin: const EdgeInsets.fromLTRB(10,5,10,10),
           decoration: BoxDecoration(
-            color: GradientHelper.getColorFromHex(ColorClass.lightGrey_COLOR), // Light gray color
+            color: GradientHelper.getColorFromHex(ColorClass.lightEditText), // Light gray color
             borderRadius: BorderRadius.circular(8.0), // Optional: adds rounded corners
           ),
           child: Padding(

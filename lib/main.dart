@@ -1,13 +1,11 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:realstateproject/Activity/DashBoardPage.dart';
-import 'package:realstateproject/Activity/LoginPage.dart';
-import 'package:realstateproject/Activity/SignUpPage.dart';
+import 'package:realstateproject/Activity/IntroductionScreen.dart';
+import 'package:realstateproject/Activity/SplashScreenPage.dart';
 import 'package:realstateproject/Colors/ColorsClass.dart';
 import 'package:realstateproject/Colors/GradientHelper.dart';
 import 'package:realstateproject/MutipleProvidersss/BottomNavigationBarProvider.dart';
-
 import 'package:realstateproject/MutipleProvidersss/LoginProvider.dart';
 import 'package:realstateproject/MutipleProvidersss/RegistrationProvider.dart';
 
@@ -28,11 +26,12 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<BottomNavigationBarProvider>(create:(_)=> BottomNavigationBarProvider()),
         ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: GradientHelper.getColorFromHex(ColorClass.RED_COLOR)),
           useMaterial3: true,
         ),
-        home: Dashboard(),
+        home: SplashScreenPage(),
       ),
     );
   }
