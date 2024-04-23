@@ -107,7 +107,6 @@ class _IntroducationScreenState extends State<IntroducationScreen> {
       pageBackgroundColor: Colors.white,
       background: [
         Container(
-
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15.0),
           

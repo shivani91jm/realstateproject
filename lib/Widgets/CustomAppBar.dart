@@ -35,7 +35,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(children: [
-                                              Container(
+                            Container(
                           margin: EdgeInsets.only(right: 70,top: 50),
                           child: Row(
                             children: [
@@ -116,9 +116,38 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                                 Text("Let's start exploring ",style: StyleClass.blackstyle,)
                               ],
                             ),
-                          )
+                          ),
+                          //----------------search bar ---------
+
                         ],
                       )),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 65,
+                    margin: EdgeInsets.fromLTRB(20,245,20,6),
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    decoration: BoxDecoration(
+                      color: GradientHelper.getColorFromHex(ColorClass.lightEditText),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(Icons.search, color: Colors.red),
+                        SizedBox(width: 10),
+                        Expanded(
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: 'Search House,Apartment..etc',
+                              hintStyle: TextStyle(
+                                color: GradientHelper.getColorFromHex(ColorClass.label_COLOR)
+                              ),
+                              border: InputBorder.none,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),

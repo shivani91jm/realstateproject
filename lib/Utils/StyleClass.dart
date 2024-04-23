@@ -31,10 +31,11 @@ class StyleClass{
   );
   static  TextStyle textformstyle = TextStyle(
     fontFamily: FontFamilyClass.fontfamily,
-    fontWeight: FontWeight.w300,
+    fontWeight: FontWeight.bold,
     fontSize: 15,
-    color: GradientHelper.getColorFromHex(ColorClass.BLACK_COLOR),
+    color: GradientHelper.getColorFromHex(ColorClass.label_COLOR),
     fontStyle: FontStyle.normal,
+
     // Add other properties as needed
   );
   static  TextStyle text17 = TextStyle(

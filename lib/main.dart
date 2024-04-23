@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: GradientHelper.getColorFromHex(ColorClass.RED_COLOR)),
           useMaterial3: true,
         ),
-        home: SplashScreenPage(),
+        home: Dashboard(),
       ),
     );
   }

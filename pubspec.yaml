@@ -39,6 +39,7 @@ dependencies:
   provider: any
   device_preview: any
   flutter_onboarding_slider: any
+  youtube_player_flutter: any
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +67,7 @@ flutter:
   assets:
      - assets/images/
      - assets/fonts/
+     - jsonfile/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
