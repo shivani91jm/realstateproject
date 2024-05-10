@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:realstateproject/Activity/DashBoardPage.dart';
-import 'package:realstateproject/Activity/IntroductionScreen.dart';
-import 'package:realstateproject/Activity/SplashScreenPage.dart';
+
 import 'package:realstateproject/Colors/ColorsClass.dart';
 import 'package:realstateproject/Colors/GradientHelper.dart';
 import 'package:realstateproject/MutipleProvidersss/BottomNavigationBarProvider.dart';
+import 'package:realstateproject/MutipleProvidersss/HomePageProvider.dart';
 import 'package:realstateproject/MutipleProvidersss/LoginProvider.dart';
+import 'package:realstateproject/MutipleProvidersss/MenuProviderClass.dart';
 import 'package:realstateproject/MutipleProvidersss/RegistrationProvider.dart';
 
 void main() {
@@ -24,6 +25,8 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<RegistrationProvider>(create: (_) => RegistrationProvider()),
           ChangeNotifierProvider<LoginProvider>(create:(_)=> LoginProvider()),
           ChangeNotifierProvider<BottomNavigationBarProvider>(create:(_)=> BottomNavigationBarProvider()),
+          ChangeNotifierProvider<MenuProvider>(create: (_) => MenuProvider()),
+          ChangeNotifierProvider<HomePageProvider>(create: (_) => HomePageProvider()),
         ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

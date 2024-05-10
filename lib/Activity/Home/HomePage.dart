@@ -1,12 +1,21 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:realstateproject/Colors/ColorsClass.dart';
 import 'package:realstateproject/Colors/GradientHelper.dart';
+import 'package:realstateproject/Models/FilterModel/Datassss.dart';
 import 'package:realstateproject/Models/MenuModels.dart';
+import 'package:realstateproject/Models/homemenu/Data.dart';
+import 'package:realstateproject/MutipleProvidersss/HomePageProvider.dart';
+import 'package:realstateproject/MutipleProvidersss/MenuProviderClass.dart';
+import 'package:realstateproject/Urls/baseUrlsClass.dart';
+import 'package:realstateproject/Utils/CommonUtilsClass.dart';
 import 'package:realstateproject/Utils/StyleClass.dart';
 import 'package:realstateproject/Widgets/CustomAppBar.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -16,6 +25,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<MenuModels> pertories=getMenus();
+  bool _isExpanded = false;
+  int _maxLines=0;
   YoutubePlayerController _controller = YoutubePlayerController(
     initialVideoId: 'iLnmTe5Q2Qw',
     flags: YoutubePlayerFlags(
@@ -23,189 +34,304 @@ class _HomePageState extends State<HomePage> {
       mute: false,
     ),
   );
+
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+    Provider.of<MenuProvider>(context, listen: false).getMenuData(context);
+    Provider.of<HomePageProvider>(context,listen: false).getHomePageDatass(context);
+
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
+     Widget build(BuildContext context) {
+    final postMdl = Provider.of<MenuProvider>(context);
+    final homepagedata= Provider.of<HomePageProvider>(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(280.0),
         child: CustomAppBar(),
       ),
-      body: Container(
-        child: Column(
-          children: [
-            Padding(
-              padding:  EdgeInsets.only(top: 16.0),
-              child: Row(
-                children: [
-                  Expanded(child: Container(
-                    height: 34,
-                    child: Stack(
-                      children: [
-                        ListView(
-                          physics: BouncingScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          children: [
-                            SizedBox(
-                              width: 24,
-                            ),
-                            builderFilter("Buy"),
-                            builderFilter("Rent"),
-                            builderFilter("Sell"),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Container(
 
-                            SizedBox(
-                              width: 8,
-                            )
-                          ],
-                        )
+          child: ListView(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            children: [
+              //-----------------menu ----------------------
+              Padding(
+                padding:  EdgeInsets.only(top: 16.0),
+                child: Row(
+                  children: [
+                    Expanded(child: Container(
+                      height: 50,
+                      child: Stack(
+                        children: [
+                          postMdl.loading? Center(child: CircularProgressIndicator(),): ListView.builder(
+                              physics: BouncingScrollPhysics(),
+                               scrollDirection: Axis.horizontal,
+                            itemCount: postMdl.data!.data!.length,
+                            itemBuilder: (context, i) {
+                              return builderFilter(postMdl.data!.data![i],context);
+                            },
+                          )
+                        ],
+                      ),
+                    )),
+
+                  ],
+                ),
+              ),
+              if(homepagedata.menuLayout==true)...{
+                Container(
+                  margin: EdgeInsets.only(top: 20),
+                  child:  homepagedata.loading?Center(
+                    child: CircularProgressIndicator(),)
+                      :  ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: homepagedata.menuLayoutData!.length,
+                    itemBuilder: (context, i) {
+                      return buildManu(homepagedata.menuLayoutData[i]);
+                    },
+                  ),),
+              }
+              else ...
+                {
+                  Container(
+                    height: 220,
+                    width: MediaQuery.of(context).size.width,
+                    margin: EdgeInsets.only(top: 30,left: 10,right: 5),
+                    child:  homepagedata.loading?Center(
+                      child: CircularProgressIndicator(),)
+                        :  ListView.builder(
+                      physics: BouncingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: homepagedata.explorethingList.length,
+                      itemBuilder: (context, i) {
+                        return buildProperty(homepagedata.explorethingList[i].img.toString(),homepagedata.explorethingList[i].title.toString(),homepagedata.explorethingList[i].desc.toString());
+                      },
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Lasted Properties : ",style: StyleClass.Red20style,),
+                        Container(
+                          margin: EdgeInsets.only(left: 10,top: 10,right: 10,bottom: 5),
+                          child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Text("View All",style: StyleClass.text14,)),
+                        ),
                       ],
                     ),
-                  )),
-                  Padding(padding: EdgeInsets.only(left: 16,right: 24),
-                    child: GestureDetector(
-                      child: Text("Filter",style: StyleClass.text17,),
-                    onTap: (){
+                  ),
+                  Container(
+                    child:  homepagedata.loading?Center(
+                      child: CircularProgressIndicator(),)
+                        :  ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: homepagedata.blogs!.length,
+                      itemBuilder: (context, i) {
+                        return buildBlogs(homepagedata.blogs![i]!.image.toString(),homepagedata.blogs![i]!.title.toString(),homepagedata.blogs![i]!.description.toString());
+                      },
+                    ),),
+                  Container(
+                    margin: EdgeInsets.all(10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Your Real Estate Guide ",style: StyleClass.text17,),
+                        Text("View All ",style: StyleClass.text17,),
 
-                    },
-                  ),)
-                ],
-              ),
-            ),
-            Expanded(
-              child: Container(
-                height: 220,
-                margin: EdgeInsets.only(top: 30),
-                child: ListView(
-                  physics: BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  children: getPro(),
-                ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.all(10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Your Real Estate Guide ",style: StyleClass.text17,),
-                  Text("View All ",style: StyleClass.text17,),
-
-                ],
-              ),
-            ),
-            Expanded(
-              child: Container(
-                height: 200,
-                child: ListView(
-                  physics: BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  children: getProTube(),
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-  Widget builderFilter(String filtername){
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12),
-      margin: EdgeInsets.only(right: 12),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(5)),
-        border: Border.all(
-          color: GradientHelper.getColorFromHex(ColorClass.blue),
-          width: 1
-        ),
-
-      ),
-      child: Center(
-        child: Text(
-          filtername,
-
-        ),
-      ),
-
-    );
-  }
-  List<Widget> getPro() {
-    List<Widget> list=[];
-   for(var i=0;i<pertories.length;i++)
-   {
-     list.add(Hero(tag: pertories[i].menuname.toString() ,child: buildProperty(pertories[i],i),));
-   }
-   return list;
-  }
-  List<Widget> getProTube() {
-    List<Widget> list=[];
-   for(var i=0;i<pertories.length;i++)
-   {
-     list.add(Hero(tag: pertories[i].menuname.toString() ,child: buildPropertyYoutUbe(pertories[i],i),));
-   }
-   return list;
-  }
-
-  Widget buildProperty(MenuModels property, int index){
-    return Card(
-          elevation: 3,
-          margin: EdgeInsets.only(bottom: 20,right: 5,left: 4),
-          clipBehavior: Clip.antiAlias,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(15)),
-
-          ),
-          child: Container(
-            color: GradientHelper.getColorFromHex(ColorClass.lightGrey_COLOR),
-            child: Row(
-              children: [
-                Container(
-                  height: 280,
-                  width: 180,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/images/m3.png",),
-
-                      fit: BoxFit.cover
+                      ],
                     ),
-                    borderRadius: BorderRadius.circular(15),
-                      gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          stops: [0,1.0],
-                          colors: [
-                            Colors.transparent,
-                            GradientHelper.getColorFromHex(ColorClass.blue)
-                          ]
-                      )
                   ),
-
-                ),
-                Container(
-
-                  child: Column(
-                    children: [
-                      Text("Price Rs..333.333"),
-                      Text("Kanpur utter pradesh")
-                    ],
+                  Container(
+                    height: 200,
+                    child: ListView(
+                      physics: BouncingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      children: getProTube(),
+                    ),
                   ),
-                )
-              ],
-            ),
+                },
+            ],
           ),
-    
-        );
+        ),
+      ),
+    );
+  }
+    Widget builderFilter(Data filtername,BuildContext context) {
+    return GestureDetector(
+      onTap: (){
+       var id= filtername.id;
+       Provider.of<HomePageProvider>(context,listen: false).getHomePageFilterMenu(context,id.toString());
+       Provider.of<HomePageProvider>(context,listen: false).setMenuLayout(true);
+       },
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 12),
+        margin: EdgeInsets.only(left: 12),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            color: GradientHelper.getColorFromHex(ColorClass.lightEditText)
+        ),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 10),
+            child: Text(filtername.name.toString(),style: StyleClass.textformstyle,),
+          ),
+        ),
+      ),
+    );
+  }
+    List<Widget> getProTube() {
+    List<Widget> list=[];
+       for(var i=0;i<pertories.length;i++)
+       {
+         list.add(Hero(tag: pertories[i].menuname.toString() ,child: buildPropertyYoutUbe(pertories[i],i),));
+       }
+     return list;
     }
+    Widget buildProperty(String property, String propertiesTitle, String prodes) {
+       return Card(
+       elevation: 3,
+       margin: EdgeInsets.only(bottom: 20,right: 5,left: 4),
+       clipBehavior: Clip.antiAlias,
+       shape: RoundedRectangleBorder(
+         borderRadius: BorderRadius.all(Radius.circular(15)),
+       ),
+       child: Container(
+         color: GradientHelper.getColorFromHex(ColorClass.lightEditText),
+         child: Row(
+           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+           children: [
+             Container(
+               height: 220,
+               width: 180,
+               margin: EdgeInsets.only(left: 5),
+               // decoration: BoxDecoration(
+               //     borderRadius: BorderRadius.circular(100),
+               //     gradient: LinearGradient(
+               //         begin: Alignment.topCenter,
+               //         end: Alignment.bottomCenter,
+               //         stops: [0,1.0],
+               //         colors: [
+               //           Colors.transparent,
+               //           GradientHelper.getColorFromHex(ColorClass.blue)
+               //         ]
+               //     )
+               // ),
+               child: CircleAvatar(
+                 backgroundImage: CachedNetworkImageProvider(property.toString()),),
+             ),
+             Container(
+               width: 200,
+               child: Column(
+                 crossAxisAlignment: CrossAxisAlignment.start,
+                 children: [
+                   Padding(
+                     padding: const EdgeInsets.all(8.0),
+                     child: Text(propertiesTitle,style: StyleClass.text17,),
+                   ),
+                   Padding(
+                  padding: const EdgeInsets.only(left: 8.0,right: 10.0),
+                  child: Text(prodes,style: StyleClass.textformstyle,),
+                )
+                 ],
+               ),
+             )
+           ],
+         ),
+       ),
+     );
+    }
+    Widget buildBlogs(String blogimg, String propertiesTitle, String prodes) {
+     return Card(
+       elevation: 3,
+       clipBehavior: Clip.antiAlias,
+       shape: RoundedRectangleBorder(
+         borderRadius: BorderRadius.all(Radius.circular(15)),
+       ),
+       child: Container(
+         color: GradientHelper.getColorFromHex(ColorClass.lightEditText),
+         child: Column(
+           children: [
+             Container(
+               height: 200,
+               width: MediaQuery.of(context).size.width,
+               decoration: BoxDecoration(
+                   borderRadius: BorderRadius.circular(15),
+                   gradient: LinearGradient(
+                       begin: Alignment.topCenter,
+                       end: Alignment.bottomCenter,
+                       stops: [0.3,1.0],
+                       colors: [Colors.transparent, GradientHelper.getColorFromHex(ColorClass.blue)]
+                   )
+               ),
+               child: ClipRRect(
+                 borderRadius: BorderRadius.circular(30),
+                 child: CachedNetworkImage(
+                   imageUrl: Urls.image_url+blogimg,fit:BoxFit.cover,
+                   placeholder: (context, url) => Center(
+                       child: Container(height: 20, width: 20,child: CircularProgressIndicator())),
+                   errorWidget: (context, url, error) => Icon(Icons.error),
+                 ),
+               ),
+             ),
+             Container(
+               child: Column(
+                 children: [
+                   Padding(
+                     padding: const EdgeInsets.all(8.0),
+                     child: Text(CommonUtilsClass.removeHtmlTags(propertiesTitle),style: StyleClass.bluestyle),
+                   ),
+                   Padding(
+                      padding: const EdgeInsets.all(8.0),
+                     child: Text( CommonUtilsClass.removeHtmlTags(prodes),
+                     maxLines: 4,
+                      style: StyleClass.textformstyle,
+                     ),
+                  ),
+                  GestureDetector(
+                 onTap: () {},
+               child: Padding(
+                  padding: const EdgeInsets.only(right: 15,bottom: 20),
+               child: Align(
+                alignment: Alignment.centerRight,
+                child: Text('View More', style: StyleClass.text14
+                ),
+              ),
+            ),
+          )
 
-
-
-    Widget buildPropertyYoutUbe(MenuModels property, int index){
-    return Card(
+                 ],
+               ),
+             )
+           ],
+         ),
+       ),
+     );
+    }
+    Widget buildPropertyYoutUbe(MenuModels property, int index) {
+      return Card(
           elevation: 3,
           margin: EdgeInsets.only(bottom: 20,right: 5,left: 4),
           clipBehavior: Clip.antiAlias,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(15)),
-
           ),
           child: Container(
             color: GradientHelper.getColorFromHex(ColorClass.lightGrey_COLOR),
@@ -222,9 +348,7 @@ class _HomePageState extends State<HomePage> {
                       playedColor: Colors.amber,
                       handleColor: Colors.amberAccent,
                     ),
-                    onReady: () {
-
-                    },
+                    onReady: () {},
                   ),
                 )
               ],
@@ -233,4 +357,133 @@ class _HomePageState extends State<HomePage> {
 
         );
     }
+    Widget buildManu(Datasss ddddd){
+        return  Card(
+          elevation: 3,
+          margin: EdgeInsets.only(bottom: 20,right: 5,left: 4),
+          clipBehavior: Clip.antiAlias,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+          ),
+          child:  Container(
+            color: GradientHelper.getColorFromHex(ColorClass.lightEditText),
+            child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: 180,
+                      width: 180,
+                     decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    stops: [0.3,1.0],
+                    colors: [Colors.transparent, GradientHelper.getColorFromHex(ColorClass.blue)]
+                )
+            ),
+                  child: Stack(
+                    children:[
+                      Container(
+                        height: 180,
+                        width: 180,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: CachedNetworkImage(
+                            imageUrl: Urls.image_url+ddddd.bannerImage.toString(),fit:BoxFit.cover,
+                            placeholder: (context, url) => Center(
+                                child: Container(height: 20, width: 20,child: CircularProgressIndicator())),
+                            errorWidget: (context, url, error) => Icon(Icons.error),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 10,
+                          left: 5,
+                          child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            // gradient: LinearGradient(
+                            //     begin: Alignment.topCenter,
+                            //     end: Alignment.bottomCenter,
+                            //     stops: [0.3,1.0],
+                            //     colors: [Colors.transparent, GradientHelper.getColorFromHex(ColorClass.blue)]
+                            // )
+                          color: GradientHelper.getColorFromHex(ColorClass.RED_COLOR)),
+                       // ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8.0,right: 10.0,bottom: 8.0,top: 8.0),
+                          child: Text(ddddd.propertyPurpose!.purpose.toString(),style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold
+                          ),),
+                        ),))
+                    ] ,
+                  ),
+                    ),
+                    Container(
+                 color: GradientHelper.getColorFromHex(ColorClass.lightEditText),
+                 child: Column(
+                 crossAxisAlignment: CrossAxisAlignment.start,
+                   children: [
+                    SizedBox(
+                      width: 200,
+                      child: Padding(
+                        padding:  EdgeInsets.all(8.0),
+                        child: Text(CommonUtilsClass.removeHtmlTags(ddddd.title.toString()),style: StyleClass.Black20style),
+                      ),
+                    ),
+                  SizedBox(
+                    width: 180,
+                    child:   Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Icon(Icons.add_location_sharp,color: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),),
+                        Expanded(
+                          child: Text(ddddd.address.toString(),
+                            style: StyleClass.textformstyle,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5.0),
+                    child: Row(
+                      children: [
+                        Text(" Price : "),
+                        Text(" \$"+ddddd.price.toString(),
+                          maxLines: 4,
+                          style: StyleClass.text17,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5.0),
+                    child: Row(
+                      children: [
+                        Text(" Capet area."),
+                        Text(ddddd.price.toString()+"Sqft",
+                          maxLines: 4,
+                          style: StyleClass.text17,
+                        ),
+                      ],
+                    ),
+                  )
+              ],
+            ),
+                    )
+                  ] ),
+          ),
+        );
+
+    }
 }
+
+
+

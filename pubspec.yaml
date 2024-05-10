@@ -40,6 +40,8 @@ dependencies:
   device_preview: any
   flutter_onboarding_slider: any
   youtube_player_flutter: any
+  cached_network_image: any
+
 
 dev_dependencies:
   flutter_test:

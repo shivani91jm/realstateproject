@@ -24,7 +24,7 @@ class _LoginPagesState extends State<LoginPages> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Consumer<LoginProvider>(builder: (context,loginProvider,child){
+        child: Consumer<LoginProvider>(builder: (context,loginProvider,child) {
           return Form(
               key: loginProvider.formKey,
               child: Container(

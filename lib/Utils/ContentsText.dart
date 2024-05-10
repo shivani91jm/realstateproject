@@ -1,4 +1,5 @@
 class ContentText{
+
   static const String start_login="Let’s Sign In";
   static const String email="Email";
   static const String password="Password";
@@ -9,5 +10,6 @@ class ContentText{
   static const String alreadyaccount="You already have an account?";
   static const String logout="Logout";
   static const String noaccount="Don't have an account?";
+  static const String submit="Submit";
 
 }

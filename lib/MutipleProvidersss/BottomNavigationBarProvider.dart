@@ -9,6 +9,4 @@ class BottomNavigationBarProvider  with ChangeNotifier{
     _selectedIndex = index;
     notifyListeners();
   }
-
-
 }

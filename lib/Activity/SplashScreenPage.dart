@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:realstateproject/Activity/IntroductionScreen.dart';
 import 'package:realstateproject/Colors/ColorsClass.dart';
@@ -7,6 +6,7 @@ import 'package:realstateproject/Colors/GradientHelper.dart';
 import 'package:realstateproject/Fonts/fontsclass.dart';
 import 'package:realstateproject/Images/AppImage.dart';
 import 'package:realstateproject/Widgets/CustomButton.dart';
+
 class SplashScreenPage extends StatefulWidget {
   const SplashScreenPage({super.key});
 
@@ -19,13 +19,11 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(
-        Duration(seconds: 3), // Adjust the duration as needed
+      Timer(Duration(seconds: 3), // Adjust the duration as needed
             () {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(
-              builder: (context) => IntroducationScreen(), // Navigate to your main screen
+            MaterialPageRoute(builder: (context) => IntroducationScreen(), // Navigate to your main screen
             ),
           );
   });
@@ -44,7 +42,6 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
               fit: BoxFit.cover,
             ),
           ),
-          // Overlay Content
           Positioned(
             top: 0,
             left: 0,

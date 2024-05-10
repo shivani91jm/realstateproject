@@ -10,7 +10,6 @@ class RegistrationProvider extends ChangeNotifier {
     nameController = TextEditingController();
     emailController = TextEditingController();
     passwordController = TextEditingController();
-
     formKey = GlobalKey<FormState>();
   }
   bool _isPasswordVisible = false;
@@ -21,8 +20,6 @@ class RegistrationProvider extends ChangeNotifier {
     _isPasswordVisible = !_isPasswordVisible;
      notifyListeners();
   }
-
-
   Future<void> register(BuildContext context) async {
     if (formKey.currentState!.validate()) {
 
