@@ -72,9 +72,9 @@ class MenuProvider extends ChangeNotifier {
    notifyListeners();
  }
    //---------------------filter data-------------------
-   Future<void> getHomePageFilterMenu(BuildContext context,String price_range,String no_room,String propose_type,city_id,properties_type) async {
+   Future<void> getHomePageFilterMenu(BuildContext context,String price_range,String no_room,String propose_type,city_id,properties_type,aminityId) async {
      loading =true;
-     datadd= await _services.AllFilterSearchPageData(context,price_range,no_room,propose_type,city_id,properties_type);
+     datadd= await _services.AllFilterSearchPageData(context,price_range,no_room,propose_type,city_id,properties_type,aminityId);
      loading= false;
      if(datadd!.properties!.data!.isNotEmpty)
      {

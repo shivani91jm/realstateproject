@@ -20,6 +20,7 @@ class _BuySearchFilterState extends State<BuySearchFilter> {
   var priceMin="",priceMax="";
   var bedrommMin="",bedroomMax="";
   var bathroomMin="",bathroomMax="";
+  var aminityId="";
 
 
   @override
@@ -323,8 +324,6 @@ class _BuySearchFilterState extends State<BuySearchFilter> {
               ),
             ],
           ),
-
-
           //----------group vale---------
           Container(
             width: MediaQuery.of(context).size.width,
@@ -382,6 +381,7 @@ class _BuySearchFilterState extends State<BuySearchFilter> {
                                   print("hsfhdsfdhf"+postMdl.getPropertiesType[i].flag.toString());
                                   var id=propertyType.id;
                                   var type=propertyType.aminity;
+                                  aminityId=id.toString();
                                   print("hsfhdsfdhf"+id.toString()+type.toString());
                                 });
                               },
@@ -446,19 +446,27 @@ class _BuySearchFilterState extends State<BuySearchFilter> {
               ),
               child: CustomButton(
                 onPressed: () async {
-                  var price="",no_room="";
-                  if(priceMin!="" && priceMax!="") {
-                    priceMin = priceMin.replaceAll('\$', '');
-                    print(priceMin);
-                    priceMax = priceMax.replaceAll('\$', '');
-                    print(priceMax);
+                  var price="",no_room="",purpose_type="";
+                  if(priceMin!="" || bedroomMax!="" || propertyTypeId!="" ||aminityId!="") {
+                    if (priceMin != "" && priceMax != "") {
+                      priceMin = priceMin.replaceAll('\$', '');
+                      print(priceMin);
+                      priceMax = priceMax.replaceAll('\$', '');
+                      print(priceMax);
 
-                     price = priceMin.toString() + ":" + priceMax.toString();
+                      price = priceMin.toString() + ":" + priceMax.toString();
+                    }
+                    if (bedrommMin != "" && bedroomMax != "") {
+                      no_room =
+                          bedrommMin.toString() + ":" + bedroomMax.toString();
+                    }
                   }
-                  if(bedrommMin!="" &&bedroomMax!="") {
-                    no_room = bedrommMin.toString() + ":" + bedroomMax.toString();
-                  }
-                  Provider.of<MenuProvider>(context,listen: false).getHomePageFilterMenu(context,price,no_room,"","",propertyTypeId);
+                  else
+                    {
+                        purpose_type="2";
+                    }
+
+                  Provider.of<MenuProvider>(context,listen: false).getHomePageFilterMenu(context,price,no_room,purpose_type,"",propertyTypeId,aminityId);
                 },
                 title: ContentText.submit,
                 colors: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),

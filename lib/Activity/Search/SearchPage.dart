@@ -25,30 +25,27 @@ class _SearcheringPageState extends State<SearcheringPage> {
   Widget build(BuildContext context) {
 
 
-    return DefaultTabController(
-        length: 3, // Number of tabs
-      child: Scaffold(
-        appBar: AppBar(
-        title: Text('Search Or Filter',style: StyleClass.Black20style,),
-        bottom: TabBar(
-          labelStyle: StyleClass.Red20style,
-         tabs: [
-          Tab(text: 'Buy',),
-          Tab(text: 'Rent'),
-          Tab(text: 'Sold'),
-        ],
-       ),
-    ),
-          body: Container(
-            child: TabBarView(
-              children: [
-                BuySearchFilter(),
-                RentSearchFilter(),
-                SoldSearchFilter(),
-              ],
-            ),
+    return Scaffold(
+      appBar: AppBar(
+      title: Text('Search Or Filter',style: StyleClass.Black20style,),
+      bottom: TabBar(
+        labelStyle: StyleClass.Red20style,
+       tabs: [
+        Tab(text: 'Buy',),
+        Tab(text: 'Rent'),
+        Tab(text: 'Sold'),
+      ],
+     ),
+        ),
+        body: Container(
+          child: TabBarView(
+            children: [
+              BuySearchFilter(),
+              RentSearchFilter(),
+              SoldSearchFilter(),
+            ],
           ),
         ),
-    );
+      );
   }
 }

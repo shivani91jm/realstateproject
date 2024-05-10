@@ -110,10 +110,10 @@ class Services {
     return data;
   }
 //-----------------------------filter all ---------------------
-  Future<FilterModelClass>AllFilterSearchPageData(context,price_range,number_of_room,purpose_type,city_id,properties_type) async {
+  Future<FilterModelClass>AllFilterSearchPageData(context,price_range,number_of_room,purpose_type,city_id,properties_type,aminity) async {
     late FilterModelClass data;
     try {
-      var url= Urls.filter_api+"page_type=list_view&search=&price_range=${price_range}&number_of_room=${number_of_room}&purpose_type=${purpose_type}&city_id=${city_id}&property_type=${properties_type}";
+      var url= Urls.filter_api+"page_type=list_view&search=&price_range=${price_range}&number_of_room=${number_of_room}&purpose_type=${purpose_type}&city_id=${city_id}&property_type=${properties_type}&aminity=${aminity}";
       print("res body"+url.toString());
       final response = await http.get(Uri.parse(url),);
       if (response.statusCode == 200) {
