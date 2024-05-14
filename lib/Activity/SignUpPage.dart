@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:realstateproject/Colors/ColorsClass.dart';
@@ -5,7 +7,7 @@ import 'package:realstateproject/Colors/GradientHelper.dart';
 import 'package:realstateproject/Fonts/fontsclass.dart';
 import 'package:realstateproject/Images/AppImage.dart';
 import 'package:realstateproject/MutipleProvidersss/RegistrationProvider.dart';
-import 'package:realstateproject/Route/RouteNames.dart';
+
 import 'package:realstateproject/Utils/ContentsText.dart';
 import 'package:realstateproject/Utils/StyleClass.dart';
 import 'package:realstateproject/Widgets/CustomButton.dart';
@@ -69,7 +71,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                    padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 7),
                      child: TextFormField(
                       controller: registrationProvider.nameController,
-                      keyboardType: TextInputType.emailAddress,
+                      keyboardType: TextInputType.text,
                         decoration: InputDecoration(
                           hintText: ContentText.fullname,
                           hintStyle: StyleClass.textformstyle,
@@ -104,6 +106,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       }
                       return null;
                     },
+                    controller: registrationProvider.emailController,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                       hintText: ContentText.email,
@@ -127,6 +130,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   ),
                   child: CustomButton(onPressed: () {
                     registrationProvider.register(context);
+
                   },
                     title: ContentText.register,
                     colors: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),)),
@@ -136,7 +140,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ),
               GestureDetector(
                 onTap: () async {
-                Navigator.pushReplacementNamed(context, RouteNames.login_screen);
+              //  Navigator.pushReplacementNamed(context, RouteNames.login_screen);
                 },
                 child: Container(
                   child: Row(

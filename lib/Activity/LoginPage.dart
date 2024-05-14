@@ -14,7 +14,6 @@ import 'package:realstateproject/Widgets/PasswordsWidgets.dart';
 
 class LoginPages extends StatefulWidget {
   const LoginPages({super.key});
-
   @override
   State<LoginPages> createState() => _LoginPagesState();
 }
@@ -80,6 +79,7 @@ class _LoginPagesState extends State<LoginPages> {
                             }
                           return null;
                         },
+                        controller: loginProvider.emailController,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           hintText: ContentText.email,
@@ -153,7 +153,6 @@ class _LoginPagesState extends State<LoginPages> {
                     ),
                   ),
                   SizedBox(height: 50,),
-
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -195,9 +194,7 @@ class _LoginPagesState extends State<LoginPages> {
                           ),
                         ),
                         child: GestureDetector(
-                          onTap: () async{
-
-                          },
+                          onTap: () async{},
                           child: Padding(
                             padding: const EdgeInsets.all(1.0),
                             child: CircleAvatar(

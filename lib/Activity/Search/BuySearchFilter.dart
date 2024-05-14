@@ -342,7 +342,6 @@ class _BuySearchFilterState extends State<BuySearchFilter> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-
                       Container(margin: EdgeInsets.only(top: 20,left: 10,bottom: 20,right: 10),
                           child: Text(valuedata.categoryName.toString(),style: StyleClass.Red20style,)),
                       Container(
@@ -457,8 +456,7 @@ class _BuySearchFilterState extends State<BuySearchFilter> {
                       price = priceMin.toString() + ":" + priceMax.toString();
                     }
                     if (bedrommMin != "" && bedroomMax != "") {
-                      no_room =
-                          bedrommMin.toString() + ":" + bedroomMax.toString();
+                      no_room = bedrommMin.toString() + ":" + bedroomMax.toString();
                     }
                   }
                   else

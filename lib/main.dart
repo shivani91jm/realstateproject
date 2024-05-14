@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:realstateproject/Activity/DashBoardPage.dart';
+import 'package:realstateproject/Activity/SplashScreenPage.dart';
 
 import 'package:realstateproject/Colors/ColorsClass.dart';
 import 'package:realstateproject/Colors/GradientHelper.dart';
@@ -9,13 +11,23 @@ import 'package:realstateproject/MutipleProvidersss/HomePageProvider.dart';
 import 'package:realstateproject/MutipleProvidersss/LoginProvider.dart';
 import 'package:realstateproject/MutipleProvidersss/MenuProviderClass.dart';
 import 'package:realstateproject/MutipleProvidersss/RegistrationProvider.dart';
-
-void main() {
-  runApp(const MyApp());
+import 'package:device_preview/device_preview.dart';
+//void main() {
+ // runApp(const MyApp());
  //  DevicePreview(
  //    builder: (context) => const MyApp(),
  //  );
-}
+
+
+  void main() => runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => MyApp(), // Wrap your app
+    ),
+  );
+
+
+//}
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
@@ -34,7 +46,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: GradientHelper.getColorFromHex(ColorClass.RED_COLOR)),
           useMaterial3: true,
         ),
-        home: Dashboard(),
+        home: SplashScreenPage(),
       ),
     );
   }

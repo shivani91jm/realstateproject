@@ -4,6 +4,7 @@ import 'package:realstateproject/Colors/GradientHelper.dart';
 import 'package:realstateproject/Fonts/fontsclass.dart';
 import 'package:realstateproject/Images/AppImage.dart';
 import 'package:realstateproject/Utils/StyleClass.dart';
+import 'package:realstateproject/Widgets/SearchAppWidget.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -73,7 +74,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                                     height: 50,
                                     width: 50,
                                     decoration: BoxDecoration(
-
                                       shape: BoxShape.circle,
                                       border: Border.all(
                                         color: Colors.green, // Border color
@@ -121,33 +121,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
                         ],
                       )),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 65,
-                    margin: EdgeInsets.fromLTRB(20,245,20,6),
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    decoration: BoxDecoration(
-                      color: GradientHelper.getColorFromHex(ColorClass.lightEditText),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(Icons.search, color: Colors.red),
-                        SizedBox(width: 10),
-                        Expanded(
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: 'Search House,Apartment..etc',
-                              hintStyle: TextStyle(
-                                color: GradientHelper.getColorFromHex(ColorClass.label_COLOR)
-                              ),
-                              border: InputBorder.none,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
+                     Container(margin: EdgeInsets.only(top: 235),
+                         child: SearchAppWidget()),
                 ],
               ),
             ),

@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:realstateproject/Models/FilterModel/Aminities.dart';
+import 'package:realstateproject/Activity/Search/FilterSearchDetailsPage.dart';
+import 'package:realstateproject/Models/FilterModel/CityFilterModel.dart';
+
 import 'package:realstateproject/Models/FilterModel/Datassss.dart';
 import 'package:realstateproject/Models/FilterModel/FilterModelClass.dart';
 import 'package:realstateproject/Models/FilterModel/PropertyType.dart';
@@ -8,8 +10,10 @@ import 'package:realstateproject/Models/Search/AninitiesData.dart';
 import 'package:realstateproject/Models/Search/GetPropertiesType.dart';
 import 'package:realstateproject/Models/Search/SearchAminity.dart';
 import 'package:realstateproject/Models/Search/SearchFilter.dart';
+import 'package:realstateproject/Models/homemenu/Data.dart';
 import 'package:realstateproject/Models/homemenu/HomeMenu.dart';
 import 'package:realstateproject/MutipleProvidersss/ApiHandle/Services.dart';
+import 'package:realstateproject/Utils/CommonUtilsClass.dart';
 
 class MenuProvider extends ChangeNotifier {
    late MenuModelClass data;
@@ -39,11 +43,11 @@ class MenuProvider extends ChangeNotifier {
    String? establishedpropertyValue;
    FilterModelClass? datadd;
    Services services = Services();
+   CityFilterModel? searchListCity;
    List<Datasss> menuLayoutData = [];
    getMenuData(context) async {
     loading = true;
     data = await services.ShowMenuList(context);
-
     loading = false;
     notifyListeners();
   }
@@ -81,10 +85,59 @@ class MenuProvider extends ChangeNotifier {
        for(int i=0;i<datadd!.properties!.data!.length;i++)
        {
          menuLayoutData = datadd!.properties!.data!;
+
        }
+       if(menuLayoutData.length>0)
+         {
+           Data datas= Data(id: 1, name: price_range.toString(), type: null);
+           List<Data> dd=[];
+           dd.add(datas);
+           Navigator.push(
+             context,
+             MaterialPageRoute(
+               builder: (context) => FilterSearchDetailsPage(data: menuLayoutData, dss: dd,), // Navigate to your main screen
+             ),
+           );
+         }
      }
+     else
+       {
+         print("no data found");
+       }
      notifyListeners();
    }
 
+//-----------city wise filter-------------------------------
 
+
+  Future<void> getHomePageFilterCity(context,keyword) async{
+    loading =true;
+    searchListCity= await _services.getFilterCityName(context, keyword);
+    loading= false;
+    if(datadd!.properties!.data!.isNotEmpty)
+    {
+      for(int i=0;i<datadd!.properties!.data!.length;i++)
+      {
+        menuLayoutData = datadd!.properties!.data!;
+
+      }
+      // if(menuLayoutData.length>0)
+      // {
+      //   Data datas= Data(id: 1, name: price_range.toString(), type: null);
+      //   List<Data> dd=[];
+      //   dd.add(datas);
+      //   Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //       builder: (context) => FilterSearchDetailsPage(data: menuLayoutData, dss: dd,), // Navigate to your main screen
+      //     ),
+      //   );
+      // }
+    }
+    else
+    {
+      print("no data found");
+    }
+    notifyListeners();
+  }
 }

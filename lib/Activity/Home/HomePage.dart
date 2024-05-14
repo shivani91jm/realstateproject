@@ -14,6 +14,8 @@ import 'package:realstateproject/Urls/baseUrlsClass.dart';
 import 'package:realstateproject/Utils/CommonUtilsClass.dart';
 import 'package:realstateproject/Utils/StyleClass.dart';
 import 'package:realstateproject/Widgets/CustomAppBar.dart';
+import 'package:realstateproject/Widgets/MenuLayoutWidget.dart';
+import 'package:realstateproject/Widgets/buildBlogs.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class HomePage extends StatefulWidget {
@@ -74,7 +76,8 @@ class _HomePageState extends State<HomePage> {
                       height: 50,
                       child: Stack(
                         children: [
-                          postMdl.loading? Center(child: CircularProgressIndicator(),): ListView.builder(
+                          postMdl.loading? Center(child: CircularProgressIndicator(),):
+                          ListView.builder(
                               physics: BouncingScrollPhysics(),
                                scrollDirection: Axis.horizontal,
                             itemCount: postMdl.data!.data!.length,
@@ -100,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                     shrinkWrap: true,
                     itemCount: homepagedata.menuLayoutData!.length,
                     itemBuilder: (context, i) {
-                      return buildManu(homepagedata.menuLayoutData[i]);
+                      return MenuLayout(ddddd: homepagedata.menuLayoutData[i],);
                     },
                   ),),
               }
@@ -145,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                       shrinkWrap: true,
                       itemCount: homepagedata.blogs!.length,
                       itemBuilder: (context, i) {
-                        return buildBlogs(homepagedata.blogs![i]!.image.toString(),homepagedata.blogs![i]!.title.toString(),homepagedata.blogs![i]!.description.toString());
+                        return buildBlogs(blogimg: homepagedata.blogs![i]!.image.toString(),propertiesTitle: homepagedata.blogs![i]!.title.toString(), prodes: homepagedata.blogs![i]!.description.toString(),);
                       },
                     ),),
                   Container(
@@ -174,12 +177,12 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-    Widget builderFilter(Data filtername,BuildContext context) {
-    return GestureDetector(
+     Widget builderFilter(Data filtername,BuildContext context) {
+     return GestureDetector(
       onTap: (){
-       var id= filtername.id;
-       Provider.of<HomePageProvider>(context,listen: false).getHomePageFilterMenu(context,id.toString());
-       Provider.of<HomePageProvider>(context,listen: false).setMenuLayout(true);
+         var id= filtername.id;
+         Provider.of<HomePageProvider>(context,listen: false).getHomePageFilterMenu(context,id.toString());
+         Provider.of<HomePageProvider>(context,listen: false).setMenuLayout(true);
        },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12),
@@ -247,8 +250,8 @@ class _HomePageState extends State<HomePage> {
                      child: Text(propertiesTitle,style: StyleClass.text17,),
                    ),
                    Padding(
-                  padding: const EdgeInsets.only(left: 8.0,right: 10.0),
-                  child: Text(prodes,style: StyleClass.textformstyle,),
+                    padding: const EdgeInsets.only(left: 8.0,right: 10.0),
+                    child: Text(prodes,style: StyleClass.textformstyle,),
                 )
                  ],
                ),
@@ -258,73 +261,7 @@ class _HomePageState extends State<HomePage> {
        ),
      );
     }
-    Widget buildBlogs(String blogimg, String propertiesTitle, String prodes) {
-     return Card(
-       elevation: 3,
-       clipBehavior: Clip.antiAlias,
-       shape: RoundedRectangleBorder(
-         borderRadius: BorderRadius.all(Radius.circular(15)),
-       ),
-       child: Container(
-         color: GradientHelper.getColorFromHex(ColorClass.lightEditText),
-         child: Column(
-           children: [
-             Container(
-               height: 200,
-               width: MediaQuery.of(context).size.width,
-               decoration: BoxDecoration(
-                   borderRadius: BorderRadius.circular(15),
-                   gradient: LinearGradient(
-                       begin: Alignment.topCenter,
-                       end: Alignment.bottomCenter,
-                       stops: [0.3,1.0],
-                       colors: [Colors.transparent, GradientHelper.getColorFromHex(ColorClass.blue)]
-                   )
-               ),
-               child: ClipRRect(
-                 borderRadius: BorderRadius.circular(30),
-                 child: CachedNetworkImage(
-                   imageUrl: Urls.image_url+blogimg,fit:BoxFit.cover,
-                   placeholder: (context, url) => Center(
-                       child: Container(height: 20, width: 20,child: CircularProgressIndicator())),
-                   errorWidget: (context, url, error) => Icon(Icons.error),
-                 ),
-               ),
-             ),
-             Container(
-               child: Column(
-                 children: [
-                   Padding(
-                     padding: const EdgeInsets.all(8.0),
-                     child: Text(CommonUtilsClass.removeHtmlTags(propertiesTitle),style: StyleClass.bluestyle),
-                   ),
-                   Padding(
-                      padding: const EdgeInsets.all(8.0),
-                     child: Text( CommonUtilsClass.removeHtmlTags(prodes),
-                     maxLines: 4,
-                      style: StyleClass.textformstyle,
-                     ),
-                  ),
-                  GestureDetector(
-                 onTap: () {},
-               child: Padding(
-                  padding: const EdgeInsets.only(right: 15,bottom: 20),
-               child: Align(
-                alignment: Alignment.centerRight,
-                child: Text('View More', style: StyleClass.text14
-                ),
-              ),
-            ),
-          )
 
-                 ],
-               ),
-             )
-           ],
-         ),
-       ),
-     );
-    }
     Widget buildPropertyYoutUbe(MenuModels property, int index) {
       return Card(
           elevation: 3,
@@ -354,135 +291,9 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-
-        );
+      );
     }
-    Widget buildManu(Datasss ddddd){
-        return  Card(
-          elevation: 3,
-          margin: EdgeInsets.only(bottom: 20,right: 5,left: 4),
-          clipBehavior: Clip.antiAlias,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(15)),
-          ),
-          child:  Container(
-            color: GradientHelper.getColorFromHex(ColorClass.lightEditText),
-            child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: 180,
-                      width: 180,
-                     decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    stops: [0.3,1.0],
-                    colors: [Colors.transparent, GradientHelper.getColorFromHex(ColorClass.blue)]
-                )
-            ),
-                  child: Stack(
-                    children:[
-                      Container(
-                        height: 180,
-                        width: 180,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: CachedNetworkImage(
-                            imageUrl: Urls.image_url+ddddd.bannerImage.toString(),fit:BoxFit.cover,
-                            placeholder: (context, url) => Center(
-                                child: Container(height: 20, width: 20,child: CircularProgressIndicator())),
-                            errorWidget: (context, url, error) => Icon(Icons.error),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 10,
-                          left: 5,
-                          child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            // gradient: LinearGradient(
-                            //     begin: Alignment.topCenter,
-                            //     end: Alignment.bottomCenter,
-                            //     stops: [0.3,1.0],
-                            //     colors: [Colors.transparent, GradientHelper.getColorFromHex(ColorClass.blue)]
-                            // )
-                          color: GradientHelper.getColorFromHex(ColorClass.RED_COLOR)),
-                       // ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 8.0,right: 10.0,bottom: 8.0,top: 8.0),
-                          child: Text(ddddd.propertyPurpose!.purpose.toString(),style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold
-                          ),),
-                        ),))
-                    ] ,
-                  ),
-                    ),
-                    Container(
-                 color: GradientHelper.getColorFromHex(ColorClass.lightEditText),
-                 child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                   children: [
-                    SizedBox(
-                      width: 200,
-                      child: Padding(
-                        padding:  EdgeInsets.all(8.0),
-                        child: Text(CommonUtilsClass.removeHtmlTags(ddddd.title.toString()),style: StyleClass.Black20style),
-                      ),
-                    ),
-                  SizedBox(
-                    width: 180,
-                    child:   Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Icon(Icons.add_location_sharp,color: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),),
-                        Expanded(
-                          child: Text(ddddd.address.toString(),
-                            style: StyleClass.textformstyle,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 5.0),
-                    child: Row(
-                      children: [
-                        Text(" Price : "),
-                        Text(" \$"+ddddd.price.toString(),
-                          maxLines: 4,
-                          style: StyleClass.text17,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 5.0),
-                    child: Row(
-                      children: [
-                        Text(" Capet area."),
-                        Text(ddddd.price.toString()+"Sqft",
-                          maxLines: 4,
-                          style: StyleClass.text17,
-                        ),
-                      ],
-                    ),
-                  )
-              ],
-            ),
-                    )
-                  ] ),
-          ),
-        );
 
-    }
 }
 
 

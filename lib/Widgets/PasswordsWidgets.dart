@@ -7,6 +7,7 @@ import 'package:realstateproject/Utils/ContentsText.dart';
 import 'package:realstateproject/Utils/StyleClass.dart';
 
 class PasswordField extends StatelessWidget {
+  Provider? provider;
   @override
   Widget build(BuildContext context) {
     return Consumer<RegistrationProvider>(
@@ -28,16 +29,14 @@ class PasswordField extends StatelessWidget {
                 // Add password strength validation if needed
                 return null;
               },
+              controller: passwordVisibilityProvider.passwordController,
               decoration: InputDecoration(
-
                 hintText: ContentText.password,
                 hintStyle: StyleClass.textformstyle,
                 border: InputBorder.none,
                 prefixIcon: Icon(Icons.lock),
                 suffixIcon: IconButton(
-                  icon: Icon(passwordVisibilityProvider.isPasswordVisible
-                      ? Icons.visibility
-                      : Icons.visibility_off),
+                  icon: Icon(passwordVisibilityProvider.isPasswordVisible ? Icons.visibility : Icons.visibility_off),
                   onPressed: () {
                     passwordVisibilityProvider.togglePasswordVisibility();
                   },

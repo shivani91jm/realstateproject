@@ -55,5 +55,6 @@ class HomePageProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+
 }
 

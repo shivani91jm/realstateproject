@@ -4,7 +4,7 @@ class Data {
   var type;
   String? slug;
 
-  Data({this.id, this.name, this.type, this.slug});
+  Data({required this.id, required this.name, required this.type, this.slug});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];

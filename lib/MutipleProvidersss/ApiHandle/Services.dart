@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:realstateproject/Models/FilterModel/CityFilterModel.dart';
 import 'package:realstateproject/Models/FilterModel/FilterModelClass.dart';
 import 'package:realstateproject/Models/Search/SearchAminity.dart';
 import 'package:realstateproject/Models/Search/SearchFilter.dart';
@@ -120,6 +121,28 @@ class Services {
         final item = json.decode(response.body);
         print("dshdhsdhhsdfdfdf"+item.toString());
         data = FilterModelClass.fromJson(item);
+
+        //  print('Error Occurredgg'+data.toString());
+      } else {
+        print('Error Occurred');
+      }
+    } catch (e) {
+      print('Error Occurredcvccv'+e.toString());
+    }
+    return data;
+  }
+  //---------------------get city name---------------
+  Future<CityFilterModel>getFilterCityName(context,keyword) async
+  {
+    late CityFilterModel data;
+    try {
+      var url= Urls.filterCity_api+keyword;
+      print("res body"+url.toString());
+      final response = await http.get(Uri.parse(url),);
+      if (response.statusCode == 200) {
+        final item = json.decode(response.body);
+        print("dshdhsdhhsdfdfdf"+item.toString());
+        data = CityFilterModel.fromJson(item);
 
         //  print('Error Occurredgg'+data.toString());
       } else {
