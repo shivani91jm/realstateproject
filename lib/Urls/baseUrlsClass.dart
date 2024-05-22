@@ -1,4 +1,5 @@
 class Urls {
+
   static const String main_url = "https://demo.misterwebhub.com/realestate/";
   static const String BaseURL = "https://demo.misterwebhub.com/realestate/api/";
   static const String home_menu = BaseURL+"header-menus";
@@ -9,4 +10,6 @@ class Urls {
   static const String register_api = BaseURL+"register";
   static const String login_api = BaseURL+"auth/login";
   static const String details_api = BaseURL+"auth/me";
+  static const String propperty_details_api = BaseURL+"property/indoor-swimming-pool";
+
 }

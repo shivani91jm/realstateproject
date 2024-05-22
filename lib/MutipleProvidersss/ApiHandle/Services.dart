@@ -132,26 +132,27 @@ class Services {
     return data;
   }
   //---------------------get city name---------------
-  Future<CityFilterModel>getFilterCityName(context,keyword) async
+  Future<List<CityFilterModel>> getFilterCityName(context,keyword) async
   {
-    late CityFilterModel data;
+    List<CityFilterModel>? data;
     try {
       var url= Urls.filterCity_api+keyword;
       print("res body"+url.toString());
       final response = await http.get(Uri.parse(url),);
       if (response.statusCode == 200) {
-        final item = json.decode(response.body);
-        print("dshdhsdhhsdfdfdf"+item.toString());
-        data = CityFilterModel.fromJson(item);
-
-        //  print('Error Occurredgg'+data.toString());
+        data= parseLocations(response.body);
       } else {
-        print('Error Occurred');
+        throw Exception('Failed to load locations');
       }
     } catch (e) {
       print('Error Occurredcvccv'+e.toString());
     }
-    return data;
+    return data!;
+
+  }
+  List<CityFilterModel> parseLocations(String responseBody) {
+    final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
+    return parsed.map<CityFilterModel>((json) => CityFilterModel.fromJson(json)).toList();
   }
 
 

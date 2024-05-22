@@ -1,13 +1,27 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:realstateproject/Models/Auth/RegistrationModel.dart';
+import 'package:realstateproject/Activity/DashBoardPage.dart';
+import 'package:realstateproject/CommonUtils.dart';
+import 'package:realstateproject/Models/Auth/DetailsModel.dart';
+import 'package:realstateproject/Models/Auth/LoginModel.dart';
+
 import 'package:realstateproject/Urls/baseUrlsClass.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
 class LoginProvider extends ChangeNotifier {
   late TextEditingController emailController;
   late TextEditingController passwordController;
   late GlobalKey<FormState> formKey;
+  bool _isPasswordVisible = false;
+  bool get isPasswordVisible => _isPasswordVisible;
+  bool _loading=false;
+  bool get loading => _loading;
+
+  void togglePasswordVisibility() {
+    _isPasswordVisible = !_isPasswordVisible;
+    notifyListeners();
+  }
   LoginProvider() {
     emailController = TextEditingController();
     passwordController = TextEditingController();
@@ -29,44 +43,64 @@ class LoginProvider extends ChangeNotifier {
           body: body);
       if (response.statusCode == 200)
       {
-        RegistrationModel data =  RegistrationModel.fromJson(jsonDecode(response.body));
+        LoginModel data =  LoginModel.fromJson(jsonDecode(response.body));
         if(data!=null)
         {
-          // loading.value=false;
-          // CommonUtilsClass.toastMessage(data.message.toString());
-          //
-          // //------------------------store data in local ---------------------
-          // SharedPreferences prefs = await SharedPreferences.getInstance();
-          // await prefs.setString('email', email);
-          // await prefs.setString('user_id', data.userId.toString());
-          // await prefs.setString('username', data.userNicename.toString());
-          // await prefs.setString('mobile_number', data.mobileNumber.toString());
-          // await prefs.setString('user_profile', data.profilePicture.toString());
-          // await prefs.setString('user_firstName', data.first_name.toString());
-          // await prefs.setString('user_lastName', data.last_name.toString());
-          //
-          // showDialog(context: context!, builder: (BuildContext context) {
-          //   return  CustomDialogBox(title: AppConstentData.Login,
-          //     descriptions: AppConstentData.loginsucess,
-          //     img: Image.asset(ImageUrls.check_url), okBtn: AppConstentData.ok
-          //     , cancelBtn: AppConstentData.cancel, pagename: RouteNames.dashboard_screen,);
-          // }
-          // );
-
-
+          print("data"+data.toString());
+          try {
+            var url= Urls.details_api;
+            print("res body"+url.toString());
+            final response = await http.post(Uri.parse(url),
+                headers: <String, String>{
+                  'Content-Type': 'application/json; charset=UTF-8',
+                  'Authorization': 'Bearer '+data.accessToken.toString()
+                });
+            if (response.statusCode == 200) {
+              _loading=false;
+              notifyListeners();
+              final item = json.decode(response.body);
+              DetailsModel  data = DetailsModel.fromJson(item);
+              print("dshdhsdhhsd"+item.toString());
+              showDeailsUser(data,context);
+              print('Error Occurredgg'+data.toString());
+            }
+            else {
+              print('Error Occurred');
+              _loading=false;
+              notifyListeners();
+            }
+          } catch (e) {
+            print('Error Occurredcvccv'+e.toString());
+          }
 
         }
       }
-
-      else if (response.statusCode == 500)
+      else if (response.statusCode == 401)
       {
-        //loading.value=false;
-        // CommonUtilsClass.toastMessage("Server side Error");
+
+      var res=  json.decode(response.body);
+        var msg= res['error'];
+        CommonUtile.snackbar(msg, "", context);
+      _loading=false;
+      notifyListeners();
       }
       else {
-        //   loading.value=false;
+        _loading=false;
+        notifyListeners();
         throw Exception('Failed to load album');
       }
     }
   }
+  void  showDeailsUser (DetailsModel detailsModel,BuildContext context) async{
+   SharedPreferences prefs = await SharedPreferences.getInstance();
+   await prefs.setString('email', detailsModel.email);
+   await prefs.setString('user_id', detailsModel.id.toString());
+   await prefs.setString('name', detailsModel.name.toString());
+   await prefs.setString('mobile_number', detailsModel.phone.toString());
+   await prefs.setString('user_profile', detailsModel.image.toString());
+   await prefs.setString('email_varify', detailsModel.emailVerified.toString());
+   await prefs.setString('address', detailsModel.address.toString());
+   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Dashboard(),));
+  }
+
 }

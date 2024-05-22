@@ -7,7 +7,8 @@ import 'package:realstateproject/Utils/StyleClass.dart';
 import 'package:realstateproject/Widgets/SearchAppWidget.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key});
+  TextEditingController controller;
+   CustomAppBar({super.key,required this.controller});
   Size get preferredSize => Size.fromHeight(200.0);
   @override
   Widget build(BuildContext context) {
@@ -122,7 +123,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         ],
                       )),
                      Container(margin: EdgeInsets.only(top: 235),
-                         child: SearchAppWidget()),
+                         child: SearchAppWidget(controller: controller,)),
                 ],
               ),
             ),

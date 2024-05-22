@@ -12,7 +12,11 @@ class buildBlogs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return
+
+
+
+      Container(
       child: Card(
         elevation: 3,
         clipBehavior: Clip.antiAlias,

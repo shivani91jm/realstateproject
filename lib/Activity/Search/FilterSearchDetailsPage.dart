@@ -19,7 +19,7 @@ List<Data> dss;
   State<FilterSearchDetailsPage> createState() => _FilterSearchDetailsPageState();
 }
 class _FilterSearchDetailsPageState extends State<FilterSearchDetailsPage> {
-
+TextEditingController searchedit=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +27,7 @@ class _FilterSearchDetailsPageState extends State<FilterSearchDetailsPage> {
         shrinkWrap: true,
         physics: BouncingScrollPhysics(),
         children: [
-          SearchAppWidget(),
+          SearchAppWidget(controller: searchedit,),
           Expanded(
             child: Container(
               height: 100,

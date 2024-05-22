@@ -37,10 +37,12 @@ dependencies:
   cupertino_icons: ^1.0.6
   http: any
   provider: any
-  device_preview: any
+
   flutter_onboarding_slider: any
   youtube_player_flutter: any
   cached_network_image: any
+  shared_preferences: any
+
 
 
 dev_dependencies:

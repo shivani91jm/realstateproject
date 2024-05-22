@@ -92,7 +92,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
                           color: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),
                           borderRadius: BorderRadius.circular(10), // Adjust the radius to your preference
                         ),
-                        child: CustomButton(onPressed: () {  }, title: "Let's start", colors: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),)),
+                        child: CustomButton( title: "Let's start", colors: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),)),
 
                   ],
                 ),

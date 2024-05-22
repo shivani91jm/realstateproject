@@ -444,28 +444,28 @@ class _BuySearchFilterState extends State<BuySearchFilter> {
                 borderRadius: BorderRadius.circular(10), // Adjust the radius to your preference
               ),
               child: CustomButton(
-                onPressed: () async {
-                  var price="",no_room="",purpose_type="";
-                  if(priceMin!="" || bedroomMax!="" || propertyTypeId!="" ||aminityId!="") {
-                    if (priceMin != "" && priceMax != "") {
-                      priceMin = priceMin.replaceAll('\$', '');
-                      print(priceMin);
-                      priceMax = priceMax.replaceAll('\$', '');
-                      print(priceMax);
-
-                      price = priceMin.toString() + ":" + priceMax.toString();
-                    }
-                    if (bedrommMin != "" && bedroomMax != "") {
-                      no_room = bedrommMin.toString() + ":" + bedroomMax.toString();
-                    }
-                  }
-                  else
-                    {
-                        purpose_type="2";
-                    }
-
-                  Provider.of<MenuProvider>(context,listen: false).getHomePageFilterMenu(context,price,no_room,purpose_type,"",propertyTypeId,aminityId);
-                },
+                // onPressed: () async {
+                //   var price="",no_room="",purpose_type="";
+                //   if(priceMin!="" || bedroomMax!="" || propertyTypeId!="" ||aminityId!="") {
+                //     if (priceMin != "" && priceMax != "") {
+                //       priceMin = priceMin.replaceAll('\$', '');
+                //       print(priceMin);
+                //       priceMax = priceMax.replaceAll('\$', '');
+                //       print(priceMax);
+                //
+                //       price = priceMin.toString() + ":" + priceMax.toString();
+                //     }
+                //     if (bedrommMin != "" && bedroomMax != "") {
+                //       no_room = bedrommMin.toString() + ":" + bedroomMax.toString();
+                //     }
+                //   }
+                //   else
+                //     {
+                //         purpose_type="2";
+                //     }
+                //
+                // Provider.of<MenuProvider>(context,listen: false).getHomePageFilterMenu(context,price,no_room,purpose_type,"",propertyTypeId,aminityId);
+                // },
                 title: ContentText.submit,
                 colors: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),
               )

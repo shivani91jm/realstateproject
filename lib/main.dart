@@ -11,7 +11,7 @@ import 'package:realstateproject/MutipleProvidersss/HomePageProvider.dart';
 import 'package:realstateproject/MutipleProvidersss/LoginProvider.dart';
 import 'package:realstateproject/MutipleProvidersss/MenuProviderClass.dart';
 import 'package:realstateproject/MutipleProvidersss/RegistrationProvider.dart';
-import 'package:device_preview/device_preview.dart';
+//import 'package:device_preview/device_preview.dart';
 //void main() {
  // runApp(const MyApp());
  //  DevicePreview(
@@ -20,10 +20,11 @@ import 'package:device_preview/device_preview.dart';
 
 
   void main() => runApp(
-    DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) => MyApp(), // Wrap your app
-    ),
+    // DevicePreview(
+    //   enabled: !kReleaseMode,
+    //   builder: (context) => MyApp(), // Wrap your app
+    // ),
+      MyApp()
   );
 
 
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: GradientHelper.getColorFromHex(ColorClass.RED_COLOR)),
           useMaterial3: true,
         ),
-        home: SplashScreenPage(),
+        home: Dashboard(),
       ),
     );
   }

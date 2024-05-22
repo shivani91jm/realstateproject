@@ -10,8 +10,7 @@ import 'package:realstateproject/MutipleProvidersss/LoginProvider.dart';
 import 'package:realstateproject/Utils/ContentsText.dart';
 import 'package:realstateproject/Utils/StyleClass.dart';
 import 'package:realstateproject/Widgets/CustomButton.dart';
-import 'package:realstateproject/Widgets/PasswordsWidgets.dart';
-
+import 'package:realstateproject/Widgets/PasswordFieldLogin.dart';
 class LoginPages extends StatefulWidget {
   const LoginPages({super.key});
   @override
@@ -92,7 +91,7 @@ class _LoginPagesState extends State<LoginPages> {
                     ),
                   ),
                   //------------password----
-                  PasswordField(),
+                  PasswordFieldLogin(),
                   //--------------------forget password----------------
                   Align(
                       alignment: Alignment.centerRight,
@@ -106,13 +105,13 @@ class _LoginPagesState extends State<LoginPages> {
                       margin: EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),
-                        borderRadius: BorderRadius.circular(10), // Adjust the radius to your preference
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      child: CustomButton(onPressed: () {
-                          loginProvider.login(context);
-                      },
-                        title: "Login",
-                        colors: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),)),
+                      child: CustomButton(
+                        title: loginProvider.loading? "": "Login",
+                        colors: GradientHelper.getColorFromHex(ColorClass.RED_COLOR)
+                      )
+                  ),
                   SizedBox(height: 20,),
                   Container(
                     margin: EdgeInsets.all(10),

@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
       mute: false,
     ),
   );
-
+TextEditingController controller=TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -57,12 +57,11 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(280.0),
-        child: CustomAppBar(),
+        child: CustomAppBar(controller: controller,),
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Container(
-
           child: ListView(
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
@@ -97,7 +96,8 @@ class _HomePageState extends State<HomePage> {
                   margin: EdgeInsets.only(top: 20),
                   child:  homepagedata.loading?Center(
                     child: CircularProgressIndicator(),)
-                      :  ListView.builder(
+                      :homepagedata.menuLayoutData!= null &&
+                      homepagedata.menuLayoutData!.isNotEmpty? ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                     itemBuilder: (context, i) {
                       return MenuLayout(ddddd: homepagedata.menuLayoutData[i],);
                     },
-                  ),),
+                  ): Center(child: Container(margin:EdgeInsets.all(20),child: Text("No data found",style: StyleClass.Black20style,)),),),
               }
               else ...
                 {
@@ -225,18 +225,7 @@ class _HomePageState extends State<HomePage> {
                height: 220,
                width: 180,
                margin: EdgeInsets.only(left: 5),
-               // decoration: BoxDecoration(
-               //     borderRadius: BorderRadius.circular(100),
-               //     gradient: LinearGradient(
-               //         begin: Alignment.topCenter,
-               //         end: Alignment.bottomCenter,
-               //         stops: [0,1.0],
-               //         colors: [
-               //           Colors.transparent,
-               //           GradientHelper.getColorFromHex(ColorClass.blue)
-               //         ]
-               //     )
-               // ),
+
                child: CircleAvatar(
                  backgroundImage: CachedNetworkImageProvider(property.toString()),),
              ),

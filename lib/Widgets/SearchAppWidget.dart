@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:realstateproject/Activity/Search/AddressSearch.dart';
 import 'package:realstateproject/Colors/ColorsClass.dart';
 import 'package:realstateproject/Colors/GradientHelper.dart';
 class SearchAppWidget extends StatelessWidget {
-  const SearchAppWidget({super.key});
+  late TextEditingController controller;
+   SearchAppWidget({super.key,required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +23,8 @@ class SearchAppWidget extends StatelessWidget {
           SizedBox(width: 10),
           Expanded(
             child: TextField(
+              showCursor: false,
+              controller: controller,
               decoration: InputDecoration(
                 hintText: 'Search House,Apartment..etc',
                 hintStyle: TextStyle(
@@ -28,8 +32,15 @@ class SearchAppWidget extends StatelessWidget {
                 ),
                 border: InputBorder.none,
               ),
+              onTap: () async {
+                showSearch(
+                  context: context,
+                  delegate: AddressSearch(),
+                );
+              },
             ),
           ),
+
         ],
       ),
     );

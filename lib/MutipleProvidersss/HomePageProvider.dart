@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:realstateproject/Models/FilterModel/Datassss.dart';
 import 'package:realstateproject/Models/FilterModel/FilterModelClass.dart';
-import 'package:realstateproject/Models/homemenu/Data.dart';
-import 'package:realstateproject/Models/homepage/Blogs.dart';
+
 import 'package:realstateproject/Models/homepage/BlogsData.dart';
-import 'package:realstateproject/Models/homepage/Data.dart';
+
 import 'package:realstateproject/Models/homepage/ExploreAllThings.dart';
 import 'package:realstateproject/Models/homepage/HomepageModelClass.dart';
 import 'package:realstateproject/MutipleProvidersss/ApiHandle/Services.dart';
@@ -22,17 +21,27 @@ class HomePageProvider extends ChangeNotifier {
   bool get menuLayoutsggg => menuLayout;
   List<Datasss> menuLayoutData = [];
   Future<void> getHomePageDatass(BuildContext context) async {
+    explorethingList.clear();
       loading =true;
       data= await _services.ShowHomePageData(context);
       loading= false;
       if(data!.data!.isNotEmpty)
       {
-        for(int i=0;i<data!.data!.length;i++)
-        {
-          explorethingList  = data!.data![i].exploreAllThings!;
-          blogs =data!.data![i].blogs!.blogs;
+        if(data!.data!.length>0) {
+          for (int i = 0; i < data!.data!.length; i++) {
+            explorethingList = data!.data![i].exploreAllThings!;
+            blogs = data!.data![i].blogs!.blogs;
+          }
         }
+        else
+          {
+            print("no data found00");
+          }
       }
+      else
+        {
+          print("no data found00");
+        }
       notifyListeners();
   }
   //---------------------filter data-------------------
@@ -40,6 +49,7 @@ class HomePageProvider extends ChangeNotifier {
   Future<void> getHomePageFilterMenu(BuildContext context,String property_type) async {
     loading =true;
     datadd= await _services.SearchPageData(context,property_type);
+    menuLayoutData.clear();
     loading= false;
     if(datadd!.properties!.data!.isNotEmpty)
     {
@@ -48,6 +58,10 @@ class HomePageProvider extends ChangeNotifier {
         menuLayoutData = datadd!.properties!.data!;
       }
     }
+    else
+      {
+        print("no data found");
+      }
     notifyListeners();
   }
   void setMenuLayout(bool value) {

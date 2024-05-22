@@ -109,35 +109,11 @@ class MenuProvider extends ChangeNotifier {
 
 //-----------city wise filter-------------------------------
 
-
-  Future<void> getHomePageFilterCity(context,keyword) async{
+  Future<List<CityFilterModel>> getHomePageFilterCity(context,keyword) async{
     loading =true;
-    searchListCity= await _services.getFilterCityName(context, keyword);
+   List<CityFilterModel> searchListCity= await _services.getFilterCityName(context, keyword);
     loading= false;
-    if(datadd!.properties!.data!.isNotEmpty)
-    {
-      for(int i=0;i<datadd!.properties!.data!.length;i++)
-      {
-        menuLayoutData = datadd!.properties!.data!;
-
-      }
-      // if(menuLayoutData.length>0)
-      // {
-      //   Data datas= Data(id: 1, name: price_range.toString(), type: null);
-      //   List<Data> dd=[];
-      //   dd.add(datas);
-      //   Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //       builder: (context) => FilterSearchDetailsPage(data: menuLayoutData, dss: dd,), // Navigate to your main screen
-      //     ),
-      //   );
-      // }
-    }
-    else
-    {
-      print("no data found");
-    }
+   return searchListCity;
     notifyListeners();
   }
 }

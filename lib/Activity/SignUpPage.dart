@@ -128,10 +128,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     color: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),
                     borderRadius: BorderRadius.circular(10), // Adjust the radius to your preference
                   ),
-                  child: CustomButton(onPressed: () {
-                    registrationProvider.register(context);
-
-                  },
+                  child: CustomButton(
+                  //   onPressed: () {
+                  //   registrationProvider.register(context);
+                  //
+                  // },
                     title: ContentText.register,
                     colors: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),)),
 
