@@ -98,7 +98,8 @@ class _LoginPagesState extends State<LoginPages> {
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(8.0,2.0,15.0,30),
                         child: Text(ContentText.forgetpassword,style: StyleClass.text17,),
-                      )),
+                      )
+                  ),
                   //-------------------login button --------------
                   Container(
                       height: 50,
@@ -143,8 +144,6 @@ class _LoginPagesState extends State<LoginPages> {
                               height: 2,
                               color: ColorClass.greyColors,
                               thickness: 1,
-
-
                             ),
                           ),
                         ),

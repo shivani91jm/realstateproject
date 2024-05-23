@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:realstateproject/Models/FilterModel/CityFilterModel.dart';
 import 'package:realstateproject/Models/FilterModel/FilterModelClass.dart';
+import 'package:realstateproject/Models/PropertyModelDetails/PropertyDetailsModelClass.dart';
 import 'package:realstateproject/Models/Search/SearchAminity.dart';
 import 'package:realstateproject/Models/Search/SearchFilter.dart';
 import 'package:realstateproject/Models/homemenu/HomeMenu.dart';
@@ -24,7 +25,7 @@ class Services {
         print('Error Occurred');
       }
     } catch (e) {
-      print('Error Occurredcvccv'+e.toString());
+      print('Error Occurredcvccv11'+e.toString());
     }
     return data;
   }
@@ -44,7 +45,7 @@ class Services {
         print('Error Occurred');
       }
     } catch (e) {
-      print('Error Occurredcvccv'+e.toString());
+      print('Error Occurredcvccv12'+e.toString());
     }
     return data;
   }
@@ -64,7 +65,7 @@ class Services {
         print('Error Occurred');
       }
     } catch (e) {
-      print('Error Occurredcvccv'+e.toString());
+      print('Error Occurredcvccv13'+e.toString());
     }
     return data;
   }
@@ -85,7 +86,7 @@ class Services {
         print('Error Occurred');
       }
     } catch (e) {
-      print('Error Occurredcvccv'+e.toString());
+      print('Error Occurredcvccv14'+e.toString());
     }
     return data;
   }
@@ -106,7 +107,7 @@ class Services {
         print('Error Occurred');
       }
     } catch (e) {
-      print('Error Occurredcvccv'+e.toString());
+      print('Error Occurredcvccv15'+e.toString());
     }
     return data;
   }
@@ -127,7 +128,7 @@ class Services {
         print('Error Occurred');
       }
     } catch (e) {
-      print('Error Occurredcvccv'+e.toString());
+      print('Error Occurredcvccv16'+e.toString());
     }
     return data;
   }
@@ -145,7 +146,7 @@ class Services {
         throw Exception('Failed to load locations');
       }
     } catch (e) {
-      print('Error Occurredcvccv'+e.toString());
+      print('Error Occurredcvccv17'+e.toString());
     }
     return data!;
 
@@ -154,6 +155,25 @@ class Services {
     final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
     return parsed.map<CityFilterModel>((json) => CityFilterModel.fromJson(json)).toList();
   }
+  Future<PropertyDetailsModelClass?> PropertiesDetailsData(context,slug) async {
+    late  PropertyDetailsModelClass data;
+    try {
+      var url= Urls.propperty_details_api+slug;
+       print("res body"+url.toString());
+      final response = await http.get(Uri.parse(url),);
+      if (response.statusCode == 200) {
+        final item = json.decode(response.body);
+        print("dshdhsdhhsdfdfdf"+item.toString());
+        data = PropertyDetailsModelClass.fromJson(item);
 
+        //  print('Error Occurredgg'+data.toString());
+      } else {
+           print('Error Occurred');
+      }
+    } catch (e) {
+        print('Error Occurredcvccv'+e.toString());
+    }
+    return data;
+  }
 
 }

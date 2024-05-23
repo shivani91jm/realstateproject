@@ -10,6 +10,6 @@ class Urls {
   static const String register_api = BaseURL+"register";
   static const String login_api = BaseURL+"auth/login";
   static const String details_api = BaseURL+"auth/me";
-  static const String propperty_details_api = BaseURL+"property/indoor-swimming-pool";
+  static const String propperty_details_api = BaseURL+"property/";
 
 }

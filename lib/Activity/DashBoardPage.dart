@@ -22,8 +22,7 @@ class _DashboardState extends State<Dashboard> {
         return BottomNavigationBar(
           currentIndex: provider.selectedIndex,
           onTap: (index) {
-            Provider.of<BottomNavigationBarProvider>(context, listen: false)
-                .setselectedIndex(index);
+            Provider.of<BottomNavigationBarProvider>(context, listen: false).setselectedIndex(index);
           },
           items: [
             BottomNavigationBarItem(

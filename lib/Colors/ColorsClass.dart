@@ -10,6 +10,7 @@ class ColorClass {
   static const Color whiteColors=Color(0xFFFFFFFF);
   static const Color blackColors=Color(0xFF0C0C0C);
   static const Color greyColors=Color(0xFFC0BBBB);
+  static const Color lightYellowColors=Color(0xFFFAEDED);
   static const Color green=Color(0xFF247924);
   static const String blue='#234F68';
 

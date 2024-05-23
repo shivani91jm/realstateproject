@@ -158,7 +158,6 @@ TextEditingController controller=TextEditingController();
                       children: [
                         Text("Your Real Estate Guide ",style: StyleClass.text17,),
                         Text("View All ",style: StyleClass.text17,),
-
                       ],
                     ),
                   ),

@@ -18,7 +18,7 @@ class IntroducationScreen extends StatefulWidget {
 class _IntroducationScreenState extends State<IntroducationScreen> {
   @override
   Widget build(BuildContext context) {
-    return   OnBoardingSlider(
+    return OnBoardingSlider(
       finishButtonText: 'Register/Login',
       onFinish: () {
         Navigator.push(

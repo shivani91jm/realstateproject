@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:realstateproject/Activity/Search/FilterSearchDetailsPage.dart';
 import 'package:realstateproject/Models/FilterModel/CityFilterModel.dart';
-
 import 'package:realstateproject/Models/FilterModel/Datassss.dart';
 import 'package:realstateproject/Models/FilterModel/FilterModelClass.dart';
 import 'package:realstateproject/Models/FilterModel/PropertyType.dart';
@@ -13,7 +12,7 @@ import 'package:realstateproject/Models/Search/SearchFilter.dart';
 import 'package:realstateproject/Models/homemenu/Data.dart';
 import 'package:realstateproject/Models/homemenu/HomeMenu.dart';
 import 'package:realstateproject/MutipleProvidersss/ApiHandle/Services.dart';
-import 'package:realstateproject/Utils/CommonUtilsClass.dart';
+
 
 class MenuProvider extends ChangeNotifier {
    late MenuModelClass data;
@@ -52,28 +51,28 @@ class MenuProvider extends ChangeNotifier {
     notifyListeners();
   }
    void  getFilterPropertiesType(context) async {
-   loading2 = true;
-   searchProperties = await services.getFilterPropertiesType(context);
-   loading2 = false;
-   List<PropertyType>? propertyType=searchProperties.propertyTypes;
-   if(propertyType!=null) {
-     getPropertiesType.clear();
-     for (int i = 0; i < propertyType!.length; i++) {
-       var id = propertyType[i].id;
-       var types = propertyType[i].type;
-       GetPropertiesType getPropertiesTypeddd = GetPropertiesType(
-           id: id.toString(), type: types, flag: false);
-       getPropertiesType.add(getPropertiesTypeddd);
-     }
+     loading2 = true;
+     searchProperties = await services.getFilterPropertiesType(context);
+     loading2 = false;
+     List<PropertyType>? propertyType=searchProperties.propertyTypes;
+     if(propertyType!=null) {
+       getPropertiesType.clear();
+       for (int i = 0; i < propertyType!.length; i++) {
+         var id = propertyType[i].id;
+         var types = propertyType[i].type;
+         GetPropertiesType getPropertiesTypeddd = GetPropertiesType(
+             id: id.toString(), type: types, flag: false);
+         getPropertiesType.add(getPropertiesTypeddd);
+       }
    }
    notifyListeners();
  }
  void  getFilterPropertiesTypeByGroup(context) async {
-   loading3 = true;
-   aminitiesModel = await services.getFilterPropertiesTypeGroupValue(context);
-   loading3 = false;
-   groupList =aminitiesModel.data!;
-   notifyListeners();
+     loading3 = true;
+     aminitiesModel = await services.getFilterPropertiesTypeGroupValue(context);
+     loading3 = false;
+     groupList =aminitiesModel.data!;
+     notifyListeners();
  }
    //---------------------filter data-------------------
    Future<void> getHomePageFilterMenu(BuildContext context,String price_range,String no_room,String propose_type,city_id,properties_type,aminityId) async {
@@ -114,6 +113,6 @@ class MenuProvider extends ChangeNotifier {
    List<CityFilterModel> searchListCity= await _services.getFilterCityName(context, keyword);
     loading= false;
    return searchListCity;
-    notifyListeners();
+   notifyListeners();
   }
 }

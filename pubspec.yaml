@@ -42,6 +42,7 @@ dependencies:
   youtube_player_flutter: any
   cached_network_image: any
   shared_preferences: any
+  device_preview: any
 
 
 

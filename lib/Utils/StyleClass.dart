@@ -68,6 +68,13 @@ class StyleClass{
     color: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),
     fontStyle: FontStyle.normal,
     // Add other properties as needed
+  ); static  TextStyle blacktext16 = TextStyle(
+    fontFamily: FontFamilyClass.fontfamily,
+    fontWeight: FontWeight.w800,
+    fontSize: 16,
+    color: GradientHelper.getColorFromHex(ColorClass.BLACK_COLOR),
+    fontStyle: FontStyle.normal,
+    // Add other properties as needed
   );
   static  TextStyle text14 = TextStyle(
     fontFamily: FontFamilyClass.fontfamily,
@@ -79,7 +86,7 @@ class StyleClass{
     decorationColor: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),
     decorationThickness: 2,
 
-    // Add other properties as needed
+
   );
 
 }

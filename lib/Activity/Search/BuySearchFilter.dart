@@ -112,9 +112,8 @@ class _BuySearchFilterState extends State<BuySearchFilter> {
                            value: postMdl.priceselectedMinValue,
                            onChanged: (newValue) {
                              setState(() {
-                             postMdl.priceselectedMinValue = newValue;
-                             priceMin=postMdl.priceselectedMinValue.toString();
-
+                              postMdl.priceselectedMinValue = newValue;
+                              priceMin=postMdl.priceselectedMinValue.toString();
                              });
                            },
                            items: postMdl.priceListMin.map<DropdownMenuItem<String>>((String value) {
