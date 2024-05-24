@@ -43,6 +43,9 @@ dependencies:
   cached_network_image: any
   shared_preferences: any
   device_preview: any
+  google_maps_flutter: any
+
+
 
 
 

@@ -7,13 +7,22 @@ import 'package:realstateproject/Utils/CommonUtilsClass.dart';
 import 'package:realstateproject/Utils/StyleClass.dart';
 
 import '../../Models/PropertyModelDetails/PropertyDetailsModelClass.dart';
+
+
+
+
 class Propertiesdetailswidget extends StatelessWidget {
   final PropertyDetailsModelClass propertyDetailsModelClass;
+
    Propertiesdetailswidget({super.key,required this. propertyDetailsModelClass});
+
+  //var loadingPercentage = 0;
+  var _isLoading=true;
+
 
   @override
   Widget build(BuildContext context) {
-      return Container(
+    return Container(
       child: Card(
         elevation: 3,
         clipBehavior: Clip.antiAlias,
@@ -194,17 +203,81 @@ class Propertiesdetailswidget extends StatelessWidget {
 
 
                       ],
-                    )
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: Divider(
+                        height: 1,
+                        color: Colors.black38,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                            margin: EdgeInsets.only(left: 10,),
+                            child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(""+propertyDetailsModelClass.property!.transactionType+" Type of Ownership",
+                                      style: StyleClass.blacktext16,
+                                    ),
+                                  )
+                                ])
+                        ),
+                        Container(
+                            margin: EdgeInsets.only(right: 30,),
+                            child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(""+propertyDetailsModelClass.property!.ageOfConstruction+" Age of Construction",style: StyleClass.blacktext16,),
+                                  )
+                                ])
+                        ),
+                      ],
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: Divider(
+                        height: 1,
+                        color: Colors.black38,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                            margin: EdgeInsets.only(left: 10,),
+                            child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(""+propertyDetailsModelClass.property!.furnishedStatus+" Finish Status",
+                                      style: StyleClass.blacktext16,
+                                    ),
+                                  )
+                                ])
+                        ),
+                        Container(
+                            margin: EdgeInsets.only(right: 30,),
+                            child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(""+propertyDetailsModelClass.property!.area+"Capet Area",style: StyleClass.blacktext16,),
+                                  )
+                                ])
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
-              Container(
-                child: Column(
-                  children: [
 
-                  ],
-                ),
-              )
+
+
 
             ],
           ),
@@ -212,4 +285,5 @@ class Propertiesdetailswidget extends StatelessWidget {
       ),
     );
   }
+
 }

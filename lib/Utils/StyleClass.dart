@@ -19,7 +19,8 @@ class StyleClass{
     color: ColorClass.greyColors,
     fontStyle: FontStyle.normal,
     // Add other properties as needed
-  );  static  TextStyle Red20style = TextStyle(
+  );
+  static  TextStyle Red20style = TextStyle(
     fontFamily: FontFamilyClass.fontfamily,
     fontWeight: FontWeight.bold,
     fontSize: 20,

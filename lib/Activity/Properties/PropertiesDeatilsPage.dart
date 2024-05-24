@@ -1,7 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:realstateproject/Activity/Properties/PropertiesDetailsWidget.dart';
+
 import 'package:realstateproject/MutipleProvidersss/HomePageProvider.dart';
+
 class PropertiesDetails extends StatefulWidget {
   var slug;
    PropertiesDetails({super.key,required this.slug});
@@ -11,22 +16,75 @@ class PropertiesDetails extends StatefulWidget {
 }
 
 class _PropertiesDetailsState extends State<PropertiesDetails> {
+  var isLoading=true;
+  late GoogleMapController mapController;
+  var latitude='';
+  var longitude='';
+  CameraPosition? cameraPosition;
+  BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
+  Completer<GoogleMapController> _googleMapController=Completer();
+  late LatLng _defaultLatLong;
+  late LatLng _draggedLatLong;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    init();
     Provider.of<HomePageProvider>(context, listen: false).getPropertiesetails(context,widget.slug);
 
+
+  }
+  void init() {
+    _defaultLatLong=LatLng(26.299265689617403 ,-80.27699558507642);
+    _draggedLatLong=_defaultLatLong;
+    cameraPosition=CameraPosition(target: _defaultLatLong, zoom: 17.5);
+
+
+  }
+  Widget _getMap() {
+    return GoogleMap(
+      mapType: MapType.normal,
+      mapToolbarEnabled: false,
+      zoomControlsEnabled: false,
+      myLocationButtonEnabled: false,
+      onMapCreated: (GoogleMapController controller){
+        if(!_googleMapController.isCompleted){
+          _googleMapController.complete(controller);
+        }
+      },
+      onCameraMove: (CameraPosition  cameraPosition){
+        _draggedLatLong = cameraPosition.target;
+      },
+      onCameraIdle: (){
+
+      },
+      initialCameraPosition: cameraPosition!,
+      myLocationEnabled: true,
+      zoomGesturesEnabled: true,
+    );
   }
   @override
   Widget build(BuildContext context) {
     final homepagedata= Provider.of<HomePageProvider>(context);
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          child: homepagedata.loading2?  Center(child: Container(child: CircularProgressIndicator(),),):Propertiesdetailswidget(propertyDetailsModelClass: homepagedata.propertyDetailsModelClass!,),
-        ),
+      body: ListView(
+        physics: BouncingScrollPhysics(),
+        shrinkWrap: true,
+        children:[
+          homepagedata.loading2?  Center(child: Container(child: CircularProgressIndicator(),),):loadData(homepagedata),
+        ]
       ),
+    );
+  }
+  Widget loadData(HomePageProvider homepagedata){
+    return ListView(
+      shrinkWrap: true,
+      scrollDirection: Axis.vertical,
+      children: [
+        Propertiesdetailswidget(propertyDetailsModelClass: homepagedata.propertyDetailsModelClass!,),
+        Container(height: 200,
+            child: _getMap()),
+      ],
     );
   }
 }
