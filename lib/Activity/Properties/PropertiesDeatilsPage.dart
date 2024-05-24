@@ -37,32 +37,9 @@ class _PropertiesDetailsState extends State<PropertiesDetails> {
   void init() {
     _defaultLatLong=LatLng(26.299265689617403 ,-80.27699558507642);
     _draggedLatLong=_defaultLatLong;
-    cameraPosition=CameraPosition(target: _defaultLatLong, zoom: 17.5);
-
-
+    cameraPosition=CameraPosition(target: _defaultLatLong, zoom: 15.5);
   }
-  Widget _getMap() {
-    return GoogleMap(
-      mapType: MapType.normal,
-      mapToolbarEnabled: false,
-      zoomControlsEnabled: false,
-      myLocationButtonEnabled: false,
-      onMapCreated: (GoogleMapController controller){
-        if(!_googleMapController.isCompleted){
-          _googleMapController.complete(controller);
-        }
-      },
-      onCameraMove: (CameraPosition  cameraPosition){
-        _draggedLatLong = cameraPosition.target;
-      },
-      onCameraIdle: (){
 
-      },
-      initialCameraPosition: cameraPosition!,
-      myLocationEnabled: true,
-      zoomGesturesEnabled: true,
-    );
-  }
   @override
   Widget build(BuildContext context) {
     final homepagedata= Provider.of<HomePageProvider>(context);
@@ -81,9 +58,10 @@ class _PropertiesDetailsState extends State<PropertiesDetails> {
       shrinkWrap: true,
       scrollDirection: Axis.vertical,
       children: [
-        Propertiesdetailswidget(propertyDetailsModelClass: homepagedata.propertyDetailsModelClass!,),
-        Container(height: 200,
-            child: _getMap()),
+
+        Propertiesdetailswidget(propertyDetailsModelClass: homepagedata.propertyDetailsModelClass!,cameraPosition: cameraPosition, googleMapController: _googleMapController,),
+
+
       ],
     );
   }

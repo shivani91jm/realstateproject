@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:realstateproject/Colors/ColorsClass.dart';
 import 'package:realstateproject/Colors/GradientHelper.dart';
 import 'package:realstateproject/Urls/baseUrlsClass.dart';
@@ -13,8 +17,9 @@ import '../../Models/PropertyModelDetails/PropertyDetailsModelClass.dart';
 
 class Propertiesdetailswidget extends StatelessWidget {
   final PropertyDetailsModelClass propertyDetailsModelClass;
-
-   Propertiesdetailswidget({super.key,required this. propertyDetailsModelClass});
+  Completer<GoogleMapController>? googleMapController;
+  CameraPosition? cameraPosition;
+   Propertiesdetailswidget({super.key,required this. propertyDetailsModelClass,required this.googleMapController,required this.cameraPosition});
 
   //var loadingPercentage = 0;
   var _isLoading=true;
@@ -276,13 +281,36 @@ class Propertiesdetailswidget extends StatelessWidget {
                 ),
               ),
 
-
+              Container(height: 300,
+                  child: _getMap(googleMapController!,cameraPosition! )),
 
 
             ],
           ),
         ),
       ),
+    );
+  }
+  Widget _getMap(Completer<GoogleMapController> _googleMapController,CameraPosition cameraPosition ) {
+    return GoogleMap(
+      mapType: MapType.normal,
+      mapToolbarEnabled: false,
+      zoomControlsEnabled: false,
+      myLocationButtonEnabled: false,
+      onMapCreated: (GoogleMapController controller){
+        if(!_googleMapController.isCompleted){
+          _googleMapController.complete(controller);
+        }
+      },
+      onCameraMove: (CameraPosition  cameraPosition){
+       // _draggedLatLong = cameraPosition.target;
+      },
+      onCameraIdle: (){
+
+      },
+      initialCameraPosition: cameraPosition!,
+      myLocationEnabled: true,
+      zoomGesturesEnabled: true,
     );
   }
 
