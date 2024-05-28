@@ -19,12 +19,12 @@ class CustomButton extends StatelessWidget {
           return  ElevatedButton(
               style: ElevatedButton.styleFrom(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10), // Adjust the radius to your preference
-          ),
-          backgroundColor: colors,
-          animationDuration:Duration(milliseconds: 200)
-          ),
+              shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10), // Adjust the radius to your preference
+              ),
+              backgroundColor: colors,
+              animationDuration:Duration(milliseconds: 200)
+              ),
 
           onPressed: () {
             loginProvider.login(context);

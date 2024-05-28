@@ -122,7 +122,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
                         ],
                       )),
-                     Container(margin: EdgeInsets.only(top: 235),
+                  Container(margin: EdgeInsets.only(top: 235),
                          child: SearchAppWidget(controller: controller,)),
                 ],
               ),

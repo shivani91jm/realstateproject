@@ -7,6 +7,7 @@ import 'package:realstateproject/Colors/GradientHelper.dart';
 import 'package:realstateproject/Fonts/fontsclass.dart';
 import 'package:realstateproject/Images/AppImage.dart';
 import 'package:realstateproject/MutipleProvidersss/RegistrationProvider.dart';
+import 'package:realstateproject/Route/RouteNames.dart';
 
 import 'package:realstateproject/Utils/ContentsText.dart';
 import 'package:realstateproject/Utils/StyleClass.dart';
@@ -128,20 +129,20 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     color: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),
                     borderRadius: BorderRadius.circular(10), // Adjust the radius to your preference
                   ),
-                  child: CustomButton(
-                  //   onPressed: () {
-                  //   registrationProvider.register(context);
-                  //
-                  // },
-                    title: ContentText.register,
-                    colors: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),)),
+                  child:   ElevatedButton(
+                    onPressed: registrationProvider.loading ? null
+                        : () {
 
+                      registrationProvider.register(context);
+                    },
+                    child: Text('SignUp'),
+                  ),),
               SizedBox(
                 height: 50,
               ),
               GestureDetector(
                 onTap: () async {
-              //  Navigator.pushReplacementNamed(context, RouteNames.login_screen);
+               Navigator.pushReplacementNamed(context, RouteNames.login_screen);
                 },
                 child: Container(
                   child: Row(

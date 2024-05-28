@@ -11,5 +11,7 @@ class ContentText{
   static const String logout="Logout";
   static const String noaccount="Don't have an account?";
   static const String submit="Submit";
+  static const String mobile="Mobile No.";
+  static const String msg="Message";
 
 }

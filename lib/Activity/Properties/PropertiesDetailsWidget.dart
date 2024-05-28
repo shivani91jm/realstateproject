@@ -1,20 +1,16 @@
 import 'dart:async';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:realstateproject/Activity/Properties/ImageDialog.dart';
 import 'package:realstateproject/Colors/ColorsClass.dart';
 import 'package:realstateproject/Colors/GradientHelper.dart';
+import 'package:realstateproject/Models/PropertyModelDetails/PropertyImages.dart';
 import 'package:realstateproject/Urls/baseUrlsClass.dart';
 import 'package:realstateproject/Utils/CommonUtilsClass.dart';
 import 'package:realstateproject/Utils/StyleClass.dart';
 
 import '../../Models/PropertyModelDetails/PropertyDetailsModelClass.dart';
-
-
-
-
 class Propertiesdetailswidget extends StatelessWidget {
   final PropertyDetailsModelClass propertyDetailsModelClass;
   Completer<GoogleMapController>? googleMapController;
@@ -23,10 +19,9 @@ class Propertiesdetailswidget extends StatelessWidget {
 
   //var loadingPercentage = 0;
   var _isLoading=true;
-
-
   @override
   Widget build(BuildContext context) {
+    List<PropertyImages>? propertiesimages=   propertyDetailsModelClass!.property!.propertyImages;
     return Container(
       child: Card(
         elevation: 3,
@@ -36,29 +31,42 @@ class Propertiesdetailswidget extends StatelessWidget {
         ),
         child: Container(
           color: GradientHelper.getColorFromHex(ColorClass.lightEditText),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: ListView(
+            shrinkWrap: true,
+            physics: BouncingScrollPhysics(),
             children: [
-              Container(
-                height: 280,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        stops: [0.3,1.0],
-                        colors: [Colors.transparent,
-                          GradientHelper.getColorFromHex(ColorClass.blue)]
-                    )
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: CachedNetworkImage(
-                    imageUrl: Urls.main_url+propertyDetailsModelClass.property!.bannerImage.toString(),fit:BoxFit.cover,
-                    placeholder: (context, url) => Center(
-                        child: Container(height: 20, width: 20,child: CircularProgressIndicator())),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
+              GestureDetector(
+                onTap: (){
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return ImageDialog(
+                        images: propertiesimages!,
+                      );
+                    },
+                  );
+                },
+                child: Container(
+                  height: 200,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          stops: [0.3,1.0],
+                          colors: [Colors.transparent,
+                            GradientHelper.getColorFromHex(ColorClass.blue)]
+                      )
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(30),
+                    child: CachedNetworkImage(
+                      imageUrl: Urls.main_url+propertyDetailsModelClass.property!.bannerImage.toString(),fit:BoxFit.cover,
+                      placeholder: (context, url) => Center(
+                          child: Container(height: 20, width: 20,child: CircularProgressIndicator())),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                    ),
                   ),
                 ),
               ),
@@ -280,10 +288,10 @@ class Propertiesdetailswidget extends StatelessWidget {
                   ],
                 ),
               ),
-
-              Container(height: 300,
-                  child: _getMap(googleMapController!,cameraPosition! )),
-
+              Container(
+                  height: 300,
+                  child: _getMap(googleMapController!,cameraPosition! )
+              ),
 
             ],
           ),
@@ -292,25 +300,28 @@ class Propertiesdetailswidget extends StatelessWidget {
     );
   }
   Widget _getMap(Completer<GoogleMapController> _googleMapController,CameraPosition cameraPosition ) {
-    return GoogleMap(
-      mapType: MapType.normal,
-      mapToolbarEnabled: false,
-      zoomControlsEnabled: false,
-      myLocationButtonEnabled: false,
-      onMapCreated: (GoogleMapController controller){
-        if(!_googleMapController.isCompleted){
-          _googleMapController.complete(controller);
-        }
-      },
-      onCameraMove: (CameraPosition  cameraPosition){
-       // _draggedLatLong = cameraPosition.target;
-      },
-      onCameraIdle: (){
+    return Container(
+      height: 200,
+      child: GoogleMap(
+        mapType: MapType.normal,
+        mapToolbarEnabled: false,
+        zoomControlsEnabled: false,
+        myLocationButtonEnabled: false,
+        onMapCreated: (GoogleMapController controller){
+          if(!_googleMapController.isCompleted){
+            _googleMapController.complete(controller);
+          }
+        },
+        onCameraMove: (CameraPosition  cameraPosition){
+         // _draggedLatLong = cameraPosition.target;
+        },
+        onCameraIdle: (){
 
-      },
-      initialCameraPosition: cameraPosition!,
-      myLocationEnabled: true,
-      zoomGesturesEnabled: true,
+        },
+        initialCameraPosition: cameraPosition!,
+        myLocationEnabled: true,
+        zoomGesturesEnabled: true,
+      ),
     );
   }
 

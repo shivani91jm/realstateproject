@@ -19,13 +19,16 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-      Timer(Duration(seconds: 3), () {
+    if(mounted)
+      {
+        Timer(Duration(seconds: 3), () {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => IntroducationScreen(), // Navigate to your main screen
             ),
           );
-      });
+        });
+      }
   }
   @override
   Widget build(BuildContext context) {

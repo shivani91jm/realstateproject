@@ -8,6 +8,7 @@ import 'package:realstateproject/Colors/ColorsClass.dart';
 import 'package:realstateproject/Colors/GradientHelper.dart';
 import 'package:realstateproject/Fonts/fontsclass.dart';
 import 'package:realstateproject/Images/AppImage.dart';
+
 class IntroducationScreen extends StatefulWidget {
   const IntroducationScreen({super.key});
 
@@ -21,9 +22,7 @@ class _IntroducationScreenState extends State<IntroducationScreen> {
     return OnBoardingSlider(
       finishButtonText: 'Register/Login',
       onFinish: () {
-        Navigator.push(
-          context,
-          CupertinoPageRoute(
+        Navigator.pushReplacement(context, CupertinoPageRoute(
             builder: (context) => const LoginPages(),
           ),
         );
@@ -106,137 +105,168 @@ class _IntroducationScreenState extends State<IntroducationScreen> {
       headerBackgroundColor: Colors.white,
       pageBackgroundColor: Colors.white,
       background: [
-        Container(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(15.0),
-          
-            child: Image.asset(AppImages.m1_url,fit: BoxFit.cover,
-              height: 400,
-              width: MediaQuery.of(context).size.width,
+          Card(
+            elevation: 3,
+            margin: EdgeInsets.only(bottom: 20,right: 10,left: 4),
+            clipBehavior: Clip.antiAlias,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(15)),
             ),
-          ),
-        ),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(15.0),
-          child: Image.asset(AppImages.m2_url,
-            fit: BoxFit.cover,
-            height: 400,
+        child:Container(
+           color: GradientHelper.getColorFromHex(ColorClass.lightEditText),
+          child: Image.asset(AppImages.m1_url,fit: BoxFit.cover,
+            height: 350,
             width: MediaQuery.of(context).size.width,
           ),
-        ),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(15.0),
-          child: Image.asset(AppImages.m3_url,fit: BoxFit.cover,
-            height: 400,
-            width: MediaQuery.of(context).size.width,
+        )),
+        Card(
+          elevation: 3,
+          margin: EdgeInsets.only(bottom: 20,right: 10,left: 4),
+          clipBehavior: Clip.antiAlias,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15)),
           ),
-        ),
+          child:Container(
+              color: GradientHelper.getColorFromHex(ColorClass.lightEditText),
+             child:Image.asset(AppImages.m2_url,
+          fit: BoxFit.cover,
+          height: 350,
+          width: MediaQuery.of(context).size.width,
+        ))),
+        Card(
+          elevation: 3,
+          margin: EdgeInsets.only(bottom: 20,right: 10,left: 4),
+          clipBehavior: Clip.antiAlias,
+          shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+          ),
+        child:Container(
+        color: GradientHelper.getColorFromHex(ColorClass.lightEditText),
+          child:   Image.asset(AppImages.m3_url,fit: BoxFit.cover,
+              height: 350,
+
+              width: MediaQuery.of(context).size.width,
+            ),)
+    )
       ],
-      speed: 1.8,
+      speed: 0.8,
       pageBodies: [
         Container(
           alignment: Alignment.center,
           width: MediaQuery.of(context).size.width,
           padding: const EdgeInsets.symmetric(horizontal: 40),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              const SizedBox(
-                height: 480,
+          child: SingleChildScrollView(
+
+            child: Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  const SizedBox(
+                    height: 380,
+                  ),
+                  Text(
+                    'On your way...',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Text(
+                    'to find the perfect looking Onboarding for your app?',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black26,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
               ),
-              Text(
-                'On your way...',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                'to find the perfect looking Onboarding for your app?',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black26,
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
+            ),
           ),
         ),
         Container(
           alignment: Alignment.center,
           width: MediaQuery.of(context).size.width,
           padding: const EdgeInsets.symmetric(horizontal: 40),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              const SizedBox(
-                height: 480,
+          child: SingleChildScrollView(
+            child: Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  const SizedBox(
+                    height: 380,
+                  ),
+                  Text(
+                    'You’ve reached your destination.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Text(
+                    'Sliding with animation',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black26,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
               ),
-              Text(
-                'You’ve reached your destination.',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                'Sliding with animation',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black26,
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
+            ),
           ),
         ),
         Container(
           alignment: Alignment.center,
           width: MediaQuery.of(context).size.width,
           padding: const EdgeInsets.symmetric(horizontal: 40),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              const SizedBox(
-                height: 480,
+          child: SingleChildScrollView(
+            child: Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  const SizedBox(
+                    height: 380,
+                  ),
+                  Text(
+                    'Start now!',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Text(
+                    'Where everything is possible and customize your onboarding.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black26,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
               ),
-              Text(
-                'Start now!',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                'Where everything is possible and customize your onboarding.',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black26,
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ],

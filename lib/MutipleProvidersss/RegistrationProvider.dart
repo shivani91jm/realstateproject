@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:realstateproject/CommonUtils.dart';
 import 'package:realstateproject/Models/Auth/RegistrationModel.dart';
 import 'package:realstateproject/Urls/baseUrlsClass.dart';
 import 'package:realstateproject/Utils/CommonUtilsClass.dart';
@@ -15,6 +16,8 @@ class RegistrationProvider extends ChangeNotifier {
    // nameController = TextEditingController();
 
   }
+   bool _loading=false;
+   bool get loading => _loading;
   bool _isPasswordVisible = false;
 
   bool get isPasswordVisible => _isPasswordVisible;
@@ -25,6 +28,7 @@ class RegistrationProvider extends ChangeNotifier {
   }
   Future<void> register(BuildContext context) async {
     if (formKey.currentState!.validate()) {
+      _loading=true;
       var urls=Urls.register_api;
       print("url is location"+urls+"nameController.text.toString("+nameController.text.toString()+passwordController.text.toString()+emailController.text.toString());
       var body=jsonEncode(<String, String>{
@@ -44,8 +48,9 @@ class RegistrationProvider extends ChangeNotifier {
         RegistrationModel data =  RegistrationModel.fromJson(jsonDecode(response.body));
         if(data!=null)
         {
-          // loading.value=false;
-          // CommonUtilsClass.toastMessage(data.message.toString());
+           _loading=false;
+           CommonUtile.snackbar(""+data.success.toString(), " ", context);
+
           //
           // //------------------------store data in local ---------------------
           // SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -72,11 +77,11 @@ class RegistrationProvider extends ChangeNotifier {
 
       else if (response.statusCode == 500)
       {
-        //loading.value=false;
-       // CommonUtilsClass.toastMessage("Server side Error");
+        _loading=false;
+        CommonUtile.snackbar("Server side Error","",context);
       }
       else {
-     //   loading.value=false;
+       _loading=false;
         throw Exception('Failed to load album');
       }
     }

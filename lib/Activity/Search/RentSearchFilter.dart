@@ -19,7 +19,6 @@ class _RentSearchFilterState extends State<RentSearchFilter> {
   @override
   Widget build(BuildContext context) {
     final postMdl = Provider.of<MenuProvider>(context);
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -30,7 +29,6 @@ class _RentSearchFilterState extends State<RentSearchFilter> {
               //-------------------property type
               Container(
                 width: MediaQuery.of(context).size.width,
-
                 child:  postMdl.loading2?Center(
                   child: CircularProgressIndicator(),)
                     :  GridView.builder(

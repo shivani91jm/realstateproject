@@ -44,6 +44,7 @@ dependencies:
   shared_preferences: any
   device_preview: any
   google_maps_flutter: any
+  lecle_flutter_carousel_pro: ^0.0.3
 
 
 

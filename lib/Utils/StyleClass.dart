@@ -18,7 +18,7 @@ class StyleClass{
     fontSize: 20,
     color: ColorClass.greyColors,
     fontStyle: FontStyle.normal,
-    // Add other properties as needed
+
   );
   static  TextStyle Red20style = TextStyle(
     fontFamily: FontFamilyClass.fontfamily,
@@ -26,7 +26,7 @@ class StyleClass{
     fontSize: 20,
     color: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),
     fontStyle: FontStyle.normal,
-    // Add other properties as needed
+
   );
   static  TextStyle Black20style = TextStyle(
     fontFamily: FontFamilyClass.fontfamily,
@@ -42,7 +42,7 @@ class StyleClass{
     fontSize: 22,
     color: GradientHelper.getColorFromHex(ColorClass.blue),
     fontStyle: FontStyle.normal,
-    // Add other properties as needed
+
   );
 
   static  TextStyle redstyle = TextStyle(
@@ -51,7 +51,6 @@ class StyleClass{
     fontSize: 30,
     color: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),
     fontStyle: FontStyle.normal,
-    // Add other properties as needed
   );
   static  TextStyle textformstyle = TextStyle(
     fontFamily: FontFamilyClass.fontfamily,
@@ -59,8 +58,6 @@ class StyleClass{
     fontSize: 15,
     color: GradientHelper.getColorFromHex(ColorClass.label_COLOR),
     fontStyle: FontStyle.normal,
-
-    // Add other properties as needed
   );
   static  TextStyle text17 = TextStyle(
     fontFamily: FontFamilyClass.fontfamily,
@@ -68,14 +65,14 @@ class StyleClass{
     fontSize: 16,
     color: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),
     fontStyle: FontStyle.normal,
-    // Add other properties as needed
-  ); static  TextStyle blacktext16 = TextStyle(
+  );
+  static  TextStyle blacktext16 = TextStyle(
     fontFamily: FontFamilyClass.fontfamily,
     fontWeight: FontWeight.w800,
     fontSize: 16,
     color: GradientHelper.getColorFromHex(ColorClass.BLACK_COLOR),
     fontStyle: FontStyle.normal,
-    // Add other properties as needed
+
   );
   static  TextStyle text14 = TextStyle(
     fontFamily: FontFamilyClass.fontfamily,
@@ -86,8 +83,6 @@ class StyleClass{
     decoration: TextDecoration.underline,
     decorationColor: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),
     decorationThickness: 2,
-
-
   );
 
 }

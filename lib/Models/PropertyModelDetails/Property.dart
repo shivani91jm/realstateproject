@@ -1,4 +1,5 @@
 import 'package:realstateproject/Models/FilterModel/PropertyType.dart';
+import 'package:realstateproject/Models/PropertyModelDetails/Admin.dart';
 import 'package:realstateproject/Models/PropertyModelDetails/PropertyImages.dart';
 
 class Property {
@@ -55,7 +56,7 @@ class Property {
  var createdAt;
  var updatedAt;
  var averageRating;
-//  Admin? admin;
+ Admin? admin;
   var user;
   PropertyType? propertyType;
   PropertyPurpose? propertyPurpose;
@@ -115,7 +116,7 @@ class Property {
         this.createdAt,
         this.updatedAt,
         this.averageRating,
-        //this.admin,
+        this.admin,
         this.user,
         this.propertyType,
         this.propertyPurpose,
@@ -175,7 +176,7 @@ class Property {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     averageRating = json['averageRating'];
-    //admin = json['admin'] != null ? new Admin.fromJson(json['admin']) : null;
+    admin = json['admin'] != null ? new Admin.fromJson(json['admin']) : null;
     user = json['user'];
     propertyType = json['property_type'] != null
         ? new PropertyType.fromJson(json['property_type'])
@@ -246,9 +247,9 @@ class Property {
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     data['averageRating'] = this.averageRating;
-    // if (this.admin != null) {
-    //   data['admin'] = this.admin!.toJson();
-    // }
+    if (this.admin != null) {
+      data['admin'] = this.admin!.toJson();
+    }
     data['user'] = this.user;
     if (this.propertyType != null) {
       data['property_type'] = this.propertyType!.toJson();

@@ -1,17 +1,19 @@
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:realstateproject/Activity/DashBoardPage.dart';
+
 import 'package:realstateproject/Activity/SplashScreenPage.dart';
 
 import 'package:realstateproject/Colors/ColorsClass.dart';
 import 'package:realstateproject/Colors/GradientHelper.dart';
 import 'package:realstateproject/MutipleProvidersss/BottomNavigationBarProvider.dart';
+import 'package:realstateproject/MutipleProvidersss/ContactEquiryProvider.dart';
 import 'package:realstateproject/MutipleProvidersss/HomePageProvider.dart';
 import 'package:realstateproject/MutipleProvidersss/LoginProvider.dart';
 import 'package:realstateproject/MutipleProvidersss/MenuProviderClass.dart';
 import 'package:realstateproject/MutipleProvidersss/RegistrationProvider.dart';
-//import 'package:device_preview/device_preview.dart';
+import 'package:device_preview/device_preview.dart';
 //void main() {
  // runApp(const MyApp());
  //  DevicePreview(
@@ -20,11 +22,11 @@ import 'package:realstateproject/MutipleProvidersss/RegistrationProvider.dart';
 
 
   void main() => runApp(
-    // DevicePreview(
-    //   enabled: !kReleaseMode,
-    //   builder: (context) => MyApp(), // Wrap your app
-    // ),
-      MyApp()
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => MyApp(), // Wrap your app
+    ),
+      //MyApp()
   );
 
 
@@ -40,6 +42,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<BottomNavigationBarProvider>(create:(_)=> BottomNavigationBarProvider()),
           ChangeNotifierProvider<MenuProvider>(create: (_) => MenuProvider()),
           ChangeNotifierProvider<HomePageProvider>(create: (_) => HomePageProvider()),
+          ChangeNotifierProvider<Contactequiryprovider>(create: (_) => Contactequiryprovider()),
         ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -47,7 +50,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: GradientHelper.getColorFromHex(ColorClass.RED_COLOR)),
           useMaterial3: true,
         ),
-        home: Dashboard(),
+        home: SplashScreenPage(),
       ),
     );
   }

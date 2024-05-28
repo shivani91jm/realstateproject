@@ -224,7 +224,6 @@ TextEditingController controller=TextEditingController();
                height: 220,
                width: 180,
                margin: EdgeInsets.only(left: 5),
-
                child: CircleAvatar(
                  backgroundImage: CachedNetworkImageProvider(property.toString()),),
              ),

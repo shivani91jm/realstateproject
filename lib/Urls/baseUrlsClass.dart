@@ -11,5 +11,6 @@ class Urls {
   static const String login_api = BaseURL+"auth/login";
   static const String details_api = BaseURL+"auth/me";
   static const String propperty_details_api = BaseURL+"property/";
+  static const String contact_enquiry_api = BaseURL+"contact-message";
 
 }
