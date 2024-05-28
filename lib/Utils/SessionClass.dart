@@ -6,6 +6,7 @@ class SessionManager {
   static const String _tokenKey = 'token';
   static const String _nameKey = 'name';
   static const String _emailKey = 'email';
+  static const String _mobileKey='mobile';
 
 
   static Future<void> setLoggedIn(bool value) async {
