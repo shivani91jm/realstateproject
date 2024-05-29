@@ -7,4 +7,5 @@ class AppImages {
   static const String back_url = "assets/images/back.png";
   static const String google_url = "assets/images/google.png";
   static const String facebook_url = "assets/images/facebook.png";
+  static const String edit_url = "assets/images/pencil.png";
 }

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:realstateproject/Activity/Home/HomePage.dart';
 import 'package:realstateproject/Activity/Search/SearchPage.dart';
 import 'package:realstateproject/Activity/Setting/ProfileSetingsPage.dart';
+import 'package:realstateproject/Activity/Setting/UserProfile/ChangePassword.dart';
 import 'package:realstateproject/MutipleProvidersss/BottomNavigationBarProvider.dart';
 
 import 'package:realstateproject/Widgets/MyDrawer.dart';
@@ -34,8 +35,10 @@ class _DashboardState extends State<Dashboard> {
               label: 'Search',
             ),
             BottomNavigationBarItem(
+
               icon: Icon(Icons.person),
               label: 'Profile',
+
             ),
           ],
         );

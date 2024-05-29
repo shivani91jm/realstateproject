@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:realstateproject/Colors/ColorsClass.dart';
 import 'package:realstateproject/Colors/GradientHelper.dart';
 import 'package:realstateproject/MutipleProvidersss/LoginProvider.dart';
-import 'package:realstateproject/MutipleProvidersss/RegistrationProvider.dart';
 import 'package:realstateproject/Utils/ContentsText.dart';
 import 'package:realstateproject/Utils/StyleClass.dart';
 

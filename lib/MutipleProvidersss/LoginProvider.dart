@@ -100,6 +100,12 @@ class LoginProvider extends ChangeNotifier {
       SessionManager.setUserId(detailsModel.id.toString());
       SessionManager.setToken(token);
       SessionManager.setName(detailsModel.name.toString());
+      SessionManager.setAddress(detailsModel.address.toString());
+      SessionManager.setMobile(detailsModel.phone.toString());
+      SessionManager.setImage(detailsModel.image.toString());
+      SessionManager.setEmail(detailsModel.email.toString());
+      SessionManager.setVerifyEmail(detailsModel.emailVerified.toString());
+
 
       // Retrieve user session
       bool? isLoggedIn = await SessionManager.isLoggedIn();

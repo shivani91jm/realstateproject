@@ -77,7 +77,7 @@ class HomePageProvider extends ChangeNotifier {
     menuLayout = value;
     notifyListeners();
   }
-  Future<void> getPropertiesetails(BuildContext con,String slug) async {
+   Future<void> getPropertiesetails(BuildContext con,String slug) async {
      loading2 =true;
       propertyDetailsModelClass= await _services.PropertiesDetailsData(con,slug);
       property= propertyDetailsModelClass!.property;

@@ -254,7 +254,8 @@ class _LoginPagesState extends State<LoginPages> {
                 ],
               )
           ));
-        },),
+          },
+        ),
       ),
     );
   }

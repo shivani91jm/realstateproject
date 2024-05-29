@@ -7,6 +7,7 @@ import 'package:realstateproject/Urls/baseUrlsClass.dart';
 
 
 class Contactequiryprovider extends ChangeNotifier {
+
   late TextEditingController emailController;
   late TextEditingController phoneController;
   late TextEditingController nameController;

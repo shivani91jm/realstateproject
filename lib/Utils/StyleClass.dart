@@ -84,5 +84,35 @@ class StyleClass{
     decorationColor: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),
     decorationThickness: 2,
   );
+  static  TextStyle blue14 = TextStyle(
+    fontFamily: FontFamilyClass.fontfamily,
+    fontWeight: FontWeight.bold,
+    fontSize: 14,
+    color: GradientHelper.getColorFromHex(ColorClass.blue),
+    fontStyle: FontStyle.normal,
+
+
+  );
+  static  TextStyle black14 = TextStyle(
+    fontFamily: FontFamilyClass.fontfamily,
+    fontWeight: FontWeight.bold,
+    fontSize: 14,
+    color: GradientHelper.getColorFromHex(ColorClass.BLACK_COLOR),
+    fontStyle: FontStyle.normal,
+  );
+ static  TextStyle red14 = TextStyle(
+    fontFamily: FontFamilyClass.fontfamily,
+    fontWeight: FontWeight.bold,
+    fontSize: 14,
+    color: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),
+    fontStyle: FontStyle.normal,
+  );
+  static  TextStyle labelcolor14 = TextStyle(
+    fontFamily: FontFamilyClass.fontfamily,
+    fontWeight: FontWeight.bold,
+    fontSize: 14,
+    color: GradientHelper.getColorFromHex(ColorClass.label_COLOR),
+    fontStyle: FontStyle.normal,
+  );
 
 }

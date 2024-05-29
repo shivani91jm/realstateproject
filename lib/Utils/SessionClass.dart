@@ -7,6 +7,9 @@ class SessionManager {
   static const String _nameKey = 'name';
   static const String _emailKey = 'email';
   static const String _mobileKey='mobile';
+  static const String _imageKey='image';
+  static const String _verifyEmailKey='verifyEmail';
+  static const String _addressKey='address';
 
 
   static Future<void> setLoggedIn(bool value) async {
@@ -23,12 +26,6 @@ class SessionManager {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(_userIdKey, userId);
   }
-
-  static Future<String?> getUserId() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString(_userIdKey);
-  }
-
   static Future<void> setToken(String token) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(_tokenKey, token);
@@ -37,6 +34,31 @@ class SessionManager {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(_nameKey, name);
   }
+  static Future<void> setEmail(String name) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_emailKey, name);
+  }
+  static Future<void> setMobile(String name) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_mobileKey, name);
+  }
+  static Future<void> setImage(String name) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_imageKey, name);
+  }
+  static Future<void> setVerifyEmail(String name) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_verifyEmailKey, name);
+  }
+  static Future<void> setAddress(String name) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_addressKey, name);
+  }
+  static Future<String?> getUserId() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_userIdKey);
+  }
+
 
   static Future<String?> getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -45,6 +67,26 @@ class SessionManager {
   static Future<String?> getName() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString(_nameKey);
+  }
+  static Future<String?> getEmail() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_emailKey);
+  }
+  static Future<String?> getAddress() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_addressKey);
+  }
+  static Future<String?> getImage() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_imageKey);
+  }
+  static Future<String?> getVerifyEmail() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_verifyEmailKey);
+  }
+  static Future<String?> getMobile() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_mobileKey);
   }
 
   static Future<void> clearSession() async {

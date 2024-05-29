@@ -8,12 +8,14 @@ import 'package:realstateproject/Activity/SplashScreenPage.dart';
 import 'package:realstateproject/Colors/ColorsClass.dart';
 import 'package:realstateproject/Colors/GradientHelper.dart';
 import 'package:realstateproject/MutipleProvidersss/BottomNavigationBarProvider.dart';
+import 'package:realstateproject/MutipleProvidersss/ChnagePasswordProvider.dart';
 import 'package:realstateproject/MutipleProvidersss/ContactEquiryProvider.dart';
 import 'package:realstateproject/MutipleProvidersss/HomePageProvider.dart';
 import 'package:realstateproject/MutipleProvidersss/LoginProvider.dart';
 import 'package:realstateproject/MutipleProvidersss/MenuProviderClass.dart';
 import 'package:realstateproject/MutipleProvidersss/RegistrationProvider.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:realstateproject/MutipleProvidersss/UpdateProfileProvider.dart';
 //void main() {
  // runApp(const MyApp());
  //  DevicePreview(
@@ -43,6 +45,8 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<MenuProvider>(create: (_) => MenuProvider()),
           ChangeNotifierProvider<HomePageProvider>(create: (_) => HomePageProvider()),
           ChangeNotifierProvider<Contactequiryprovider>(create: (_) => Contactequiryprovider()),
+          ChangeNotifierProvider<ChangePasswordProvider>(create: (_) => ChangePasswordProvider()),
+          ChangeNotifierProvider<Updateprofileprovider>(create: (_) => Updateprofileprovider()),
         ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

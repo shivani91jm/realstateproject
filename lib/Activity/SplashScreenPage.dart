@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:realstateproject/Activity/DashBoardPage.dart';
 import 'package:realstateproject/Activity/IntroductionScreen.dart';
 import 'package:realstateproject/Colors/ColorsClass.dart';
 import 'package:realstateproject/Colors/GradientHelper.dart';
 import 'package:realstateproject/Fonts/fontsclass.dart';
 import 'package:realstateproject/Images/AppImage.dart';
+import 'package:realstateproject/Utils/SessionClass.dart';
 import 'package:realstateproject/Widgets/CustomButton.dart';
 
 class SplashScreenPage extends StatefulWidget {
@@ -19,16 +21,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    if(mounted)
-      {
-        Timer(Duration(seconds: 3), () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => IntroducationScreen(), // Navigate to your main screen
-            ),
-          );
-        });
-      }
+   pageRedirect();
   }
   @override
   Widget build(BuildContext context) {
@@ -104,5 +97,28 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
         ],
       ),
     );
+  }
+
+  void pageRedirect() async{
+    if(mounted)
+    {
+
+      Timer(Duration(seconds: 3), () async {
+        bool? isLoggedIn = await SessionManager.isLoggedIn();
+        String? userId = await SessionManager.getUserId();
+        if(isLoggedIn==true && (userId!=null && userId!=""))
+        {
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Dashboard(), // Navigate to your main screen
+            ),
+          );
+        }
+        else
+        {
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => IntroducationScreen(), // Navigate to your main screen
+            ),
+          );
+        }
+      });
+    }
   }
 }

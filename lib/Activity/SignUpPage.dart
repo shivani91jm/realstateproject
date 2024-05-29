@@ -38,9 +38,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 height: 200,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20), // Adjust the radius to your preference
+                  borderRadius: BorderRadius.circular(20),
                 ),
-                child: Image.asset(AppImages.back_url, // Provide path to your image asset
+                child: Image.asset(AppImages.back_url,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -78,7 +78,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           hintStyle: StyleClass.textformstyle,
                           border: InputBorder.none,
                           prefixIcon: Icon(Icons.person),
-                          // Removes the default underline border
+
                         ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -142,7 +142,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ),
               GestureDetector(
                 onTap: () async {
-               Navigator.pushReplacementNamed(context, RouteNames.login_screen);
+                  Navigator.pushReplacementNamed(context, RouteNames.login_screen);
                 },
                 child: Container(
                   child: Row(
