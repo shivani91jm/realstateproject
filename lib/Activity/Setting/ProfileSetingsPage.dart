@@ -51,7 +51,13 @@ class _ProfileSettingsState extends State<ProfileSettings> {
           actions: [
             GestureDetector(
               onTap: () {
-                _showAlertDialog(context);
+                if(islogin==true) {
+                  _showAlertDialog(context,"Logout","Are you sure logout this app","1");
+                }
+                else
+                  {
+                    _showAlertDialog(context,"Login","Please Login ","2");
+                  }
               },
               child: Container(
                   width: 30,
@@ -306,23 +312,27 @@ class _ProfileSettingsState extends State<ProfileSettings> {
   }
 
 
-  void _showAlertDialog(BuildContext context) {
+  void _showAlertDialog(BuildContext context,String title, String msg , String flag) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Logout'),
-          content: Text('Are you sure logout this app.'),
+          title: Text(title),
+          content: Text(msg),
           actions: <Widget>[
             TextButton(
               child: Text('Yes'),
               onPressed: () async {
-                SessionManager.clearSession();
-                Navigator.pushReplacement(context, MaterialPageRoute(
-                  builder: (context) =>
-                      LoginPages(), // Navigate to your main screen
-                ),
-                );
+                  if(flag=="1")
+                    {
+                      SessionManager.clearSession();
+                      Navigator.pushReplacement(context, MaterialPageRoute(
+                        builder: (context) =>
+                            LoginPages(), // Navigate to your main screen
+                      ),
+                      );
+                    }
+
               },
             ),
             TextButton(
