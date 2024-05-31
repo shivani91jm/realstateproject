@@ -51,14 +51,14 @@ class _BuySearchFilterState extends State<BuySearchFilter> {
             child:  postMdl.loading2?Center(
               child: CircularProgressIndicator(),)
                 :  GridView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              physics: BouncingScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, // Display two columns
-                crossAxisSpacing: 2.0, // Horizontal spacing between grid items
-                mainAxisSpacing: 2.0, // Vertical spacing between grid items
-                childAspectRatio: 2, // Aspect ratio of each grid item
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                   physics: BouncingScrollPhysics(),
+                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 2.0,
+                    mainAxisSpacing: 2.0,
+                    childAspectRatio: 2,
               ),
               itemCount: postMdl.getPropertiesType!.length,
               itemBuilder: (context, i) {
@@ -466,7 +466,7 @@ class _BuySearchFilterState extends State<BuySearchFilter> {
                 // Provider.of<MenuProvider>(context,listen: false).getHomePageFilterMenu(context,price,no_room,purpose_type,"",propertyTypeId,aminityId);
                 // },
                 title: ContentText.submit,
-                colors: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),
+                colors: GradientHelper.getColorFromHex(ColorClass.RED_COLOR), size: 15,
               )
           ),
         ],

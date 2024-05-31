@@ -14,5 +14,6 @@ class ContentText{
   static const String mobile="Mobile No.";
   static const String msg="Message";
   static const String add="Address";
+  static const String login="Login";
 
 }

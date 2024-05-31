@@ -45,7 +45,6 @@ class _PropertiesDetailsState extends State<PropertiesDetails> {
     _draggedLatLong=_defaultLatLong;
     cameraPosition=CameraPosition(target: _defaultLatLong, zoom: 15.5);
   }
-
   @override
   Widget build(BuildContext context) {
     final homepagedata= Provider.of<HomePageProvider>(context);

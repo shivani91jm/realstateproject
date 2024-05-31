@@ -71,7 +71,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
                       child: Text("Real Estate", style: TextStyle(
                           color: ColorClass.whiteColors,
                         fontFamily: FontFamilyClass.fontfamily,
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.bold,
                         fontSize: 35
                       ),),
                     ),
@@ -79,7 +79,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
                     SizedBox(
                       height: 200,
                     ),
-                    Container(
+                    Container (
                       height: 50,
                         width: 250,
                         margin: EdgeInsets.all(10),
@@ -87,7 +87,8 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
                           color: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),
                           borderRadius: BorderRadius.circular(10), // Adjust the radius to your preference
                         ),
-                        child: CustomButton( title: "Let's start", colors: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),)),
+                        child: CustomButton( title: "Let's start", colors: GradientHelper.getColorFromHex(ColorClass.RED_COLOR), size: 18,)
+                    ),
 
                   ],
                 ),
@@ -100,25 +101,29 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   }
 
   void pageRedirect() async{
-    if(mounted)
-    {
-
-      Timer(Duration(seconds: 3), () async {
+    Timer(Duration(seconds: 3), () async {
         bool? isLoggedIn = await SessionManager.isLoggedIn();
         String? userId = await SessionManager.getUserId();
         if(isLoggedIn==true && (userId!=null && userId!=""))
         {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Dashboard(), // Navigate to your main screen
+          if(mounted) {
+            Navigator.pushReplacement(context, MaterialPageRoute(
+              builder: (context) => Dashboard(), // Navigate to your main screen
             ),
-          );
+            );
+          }
         }
         else
         {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => IntroducationScreen(), // Navigate to your main screen
+          if(mounted) {
+            Navigator.pushReplacement(context, MaterialPageRoute(
+              builder: (context) =>
+                  IntroducationScreen(), // Navigate to your main screen
             ),
-          );
+            );
+          }
         }
       });
     }
-  }
+
 }

@@ -93,4 +93,26 @@ class SessionManager {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.clear();
   }
+
+
+
+
+//
+// //------------------------store data in local ---------------------
+// SharedPreferences prefs = await SharedPreferences.getInstance();
+// await prefs.setString('email', email);
+// await prefs.setString('user_id', data.userId.toString());
+// await prefs.setString('username', data.userNicename.toString());
+// await prefs.setString('mobile_number', data.mobileNumber.toString());
+// await prefs.setString('user_profile', data.profilePicture.toString());
+// await prefs.setString('user_firstName', data.first_name.toString());
+// await prefs.setString('user_lastName', data.last_name.toString());
+//
+// showDialog(context: context!, builder: (BuildContext context) {
+//   return  CustomDialogBox(title: AppConstentData.Login,
+//     descriptions: AppConstentData.loginsucess,
+//     img: Image.asset(ImageUrls.check_url), okBtn: AppConstentData.ok
+//     , cancelBtn: AppConstentData.cancel, pagename: RouteNames.dashboard_screen,);
+// }
+// );
 }

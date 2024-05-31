@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:realstateproject/Activity/DashBoardPage.dart';
@@ -33,64 +34,78 @@ class LoginProvider extends ChangeNotifier {
     formKey = GlobalKey<FormState>();
   }
 
-  Future<void> login(BuildContext context) async {
+ login(BuildContext context) async {
     if (formKey.currentState!.validate()) {
-      var urls = Urls.login_api;
-      print("url is location" + urls + "nameController.text.toString(" +
-          passwordController.text.toString() + emailController.text.toString());
-      var body = jsonEncode(<String, String>{
-        'password': passwordController.text.toString(),
-        'email': emailController.text.toString()
-      });
-      print("body" + body.toString());
-      final response = await http.post(Uri.parse(urls),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
-          body: body);
-      if (response.statusCode == 200) {
-        LoginModel data = LoginModel.fromJson(jsonDecode(response.body));
-        if (data != null) {
-          print("data" + data.toString());
-          var token=data.accessToken.toString();
-          try {
-            var url = Urls.details_api;
-            print("res body" + url.toString());
-            final response = await http.post(Uri.parse(url),
-                headers: <String, String>{
-                  'Content-Type': 'application/json; charset=UTF-8',
-                  'Authorization': 'Bearer ' + data.accessToken.toString()
-                });
-            if (response.statusCode == 200) {
-              _loading = false;
-              notifyListeners();
-              final item = json.decode(response.body);
-              DetailsModel data = DetailsModel.fromJson(item);
-              print("dshdhsdhhsd" + item.toString());
-              showDeailsUser(data, context,token);
-              print('Error Occurredgg' + data.toString());
+      _loading=true;
+      notifyListeners();
+      try{
+        final result = await InternetAddress.lookup('google.com');
+        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+          var urls = Urls.login_api;
+          print("url is location" + urls + "nameController.text.toString(" +
+              passwordController.text.toString() + emailController.text.toString());
+          var body = jsonEncode(<String, String>{
+            'password': passwordController.text.toString(),
+            'email': emailController.text.toString()
+          });
+          print("body" + body.toString());
+          final response = await http.post(Uri.parse(urls),
+              headers: <String, String>{
+                'Content-Type': 'application/json; charset=UTF-8',
+              },
+              body: body);
+          if (response.statusCode == 200) {
+            LoginModel data = LoginModel.fromJson(jsonDecode(response.body));
+            if (data != null) {
+              print("data" + data.toString());
+              var token=data.accessToken.toString();
+              try {
+                var url = Urls.details_api;
+                print("res body" + url.toString());
+                final response = await http.post(Uri.parse(url),
+                    headers: <String, String>{
+                      'Content-Type': 'application/json; charset=UTF-8',
+                      'Authorization': 'Bearer ' + data.accessToken.toString()
+                    });
+                if (response.statusCode == 200) {
+                  _loading = false;
+                  notifyListeners();
+                  final item = json.decode(response.body);
+                  DetailsModel data = DetailsModel.fromJson(item);
+                  print("dshdhsdhhsd" + item.toString());
+                  showDeailsUser(data, context,token);
+                  print('Error Occurredgg' + data.toString());
+                }
+
+              } catch (e) {
+                CommonUtile.snackbarRed("Something went wrong...", "", context);
+              }
             }
+          }
+          else if (response.statusCode == 401) {
+            var res = json.decode(response.body);
+            var msg = res['error'];
+            if(msg=="Unauthorized")
+              {
+                CommonUtile.snackbarRed("Email or Password not matched try again ...", "", context);
+              }
             else {
-              print('Error Occurred');
-              _loading = false;
-              notifyListeners();
+              CommonUtile.snackbarRed(msg, "", context);
             }
-          } catch (e) {
-            print('Error Occurredcvccv' + e.toString());
+            _loading = false;
+            notifyListeners();
+          }
+          else {
+            CommonUtile.snackbarRed("Something went wrong...", "", context);
+            _loading = false;
+            notifyListeners();
+            throw Exception('Failed to load album');
           }
         }
-      }
-      else if (response.statusCode == 401) {
-        var res = json.decode(response.body);
-        var msg = res['error'];
-        CommonUtile.snackbar(msg, "", context);
-        _loading = false;
+      } on SocketException catch(_){
+        _loading=false;
         notifyListeners();
-      }
-      else {
-        _loading = false;
-        notifyListeners();
-        throw Exception('Failed to load album');
+        CommonUtile.snackbarRed("No Internet Connection...", "", context);
       }
     }
   }

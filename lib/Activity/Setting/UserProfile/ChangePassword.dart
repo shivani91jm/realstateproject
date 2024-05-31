@@ -41,7 +41,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                         ),
                         child: CustomButton(
                             title: changeProvider.loading? "": "Change Password",
-                            colors: GradientHelper.getColorFromHex(ColorClass.RED_COLOR)
+                            colors: GradientHelper.getColorFromHex(ColorClass.RED_COLOR), size: 15,
                         )
                     ),
 

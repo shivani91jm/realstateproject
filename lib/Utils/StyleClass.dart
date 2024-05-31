@@ -59,6 +59,13 @@ class StyleClass{
     color: GradientHelper.getColorFromHex(ColorClass.label_COLOR),
     fontStyle: FontStyle.normal,
   );
+  static  TextStyle whitestyle = TextStyle(
+    fontFamily: FontFamilyClass.fontfamily,
+    fontWeight: FontWeight.bold,
+    fontSize: 15,
+    color:ColorClass.whiteColors,
+    fontStyle: FontStyle.normal,
+  );
   static  TextStyle text17 = TextStyle(
     fontFamily: FontFamilyClass.fontfamily,
     fontWeight: FontWeight.w800,
@@ -90,8 +97,6 @@ class StyleClass{
     fontSize: 14,
     color: GradientHelper.getColorFromHex(ColorClass.blue),
     fontStyle: FontStyle.normal,
-
-
   );
   static  TextStyle black14 = TextStyle(
     fontFamily: FontFamilyClass.fontfamily,

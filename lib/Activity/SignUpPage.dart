@@ -12,7 +12,9 @@ import 'package:realstateproject/Route/RouteNames.dart';
 import 'package:realstateproject/Utils/ContentsText.dart';
 import 'package:realstateproject/Utils/StyleClass.dart';
 import 'package:realstateproject/Widgets/CustomButton.dart';
+import 'package:realstateproject/Widgets/CustomButton2.dart';
 import 'package:realstateproject/Widgets/PasswordsWidgets.dart';
+import 'package:realstateproject/Widgets/SingUpDesignWidget.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({super.key});
@@ -34,16 +36,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: 200,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Image.asset(AppImages.back_url,
-                  fit: BoxFit.cover,
-                ),
-              ),
+              Singupdesignwidget(flag: '1',),
               Padding(
                 padding: const EdgeInsets.fromLTRB(15,15,0,3),
                 child: Row(children: [
@@ -63,7 +56,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ),
               //--------------name
                Container(
-                    margin: EdgeInsets.all(10),
+                   margin: EdgeInsets.only(bottom: 10,right: 20,left: 20,top: 10),
                     decoration: BoxDecoration(
                       color: GradientHelper.getColorFromHex(ColorClass.lightEditText), // Light gray color
                       borderRadius: BorderRadius.circular(8.0), // Optional: adds rounded corners
@@ -75,9 +68,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       keyboardType: TextInputType.text,
                         decoration: InputDecoration(
                           hintText: ContentText.fullname,
-                          hintStyle: StyleClass.textformstyle,
+                          hintStyle: StyleClass.labelcolor14,
                           border: InputBorder.none,
-                          prefixIcon: Icon(Icons.person),
+                          prefixIcon: Icon(Icons.person,color: GradientHelper.getColorFromHex(
+                            ColorClass.blue,), size: 20,),
 
                         ),
                       validator: (value) {
@@ -89,7 +83,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ),)),
               //--------------email------------
               Container(
-                margin: EdgeInsets.all(10),
+                margin: EdgeInsets.only(bottom: 10,right: 20,left: 20,top: 5),
                 decoration: BoxDecoration(
                   color: GradientHelper.getColorFromHex(ColorClass.lightEditText), // Light gray color
                   borderRadius: BorderRadius.circular(8.0), // Optional: adds rounded corners
@@ -111,9 +105,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                       hintText: ContentText.email,
-                      hintStyle: StyleClass.textformstyle,
+                      hintStyle: StyleClass.labelcolor14,
                       border: InputBorder.none,
-                      prefixIcon: Icon(Icons.email),
+                      prefixIcon: Icon(Icons.email,color: GradientHelper.getColorFromHex(
+                        ColorClass.blue,), size: 20,),
                       // Removes the default underline border
                     ),
                   ),
@@ -121,22 +116,25 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ),
               //------------password----
               PasswordField(),
-              //-------------------login button --------------
+              //-------------------singup button --------------
+
               Container(
                   height: 50,
-                  margin: EdgeInsets.fromLTRB(10,30,10,30),
+                  margin: EdgeInsets.only(bottom: 10,right: 20,left: 20,top: 10),
                   decoration: BoxDecoration(
                     color: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),
-                    borderRadius: BorderRadius.circular(10), // Adjust the radius to your preference
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  child:   ElevatedButton(
-                    onPressed: registrationProvider.loading ? null
-                        : () {
-
+                  child: CustomeButton2(
+                    onPressed: (){
                       registrationProvider.register(context);
                     },
-                    child: Text('SignUp'),
-                  ),),
+
+                    title: registrationProvider.loading? "": "SignUp",
+                    colors: GradientHelper.getColorFromHex(ColorClass.RED_COLOR), size: 16, isLoading: registrationProvider.loading,
+                  )
+              ),
+
               SizedBox(
                 height: 50,
               ),

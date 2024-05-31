@@ -42,252 +42,294 @@ class _ProfileSettingsState extends State<ProfileSettings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+          backgroundColor: Colors.white,
           elevation: 0,
+          centerTitle: true,
           title: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text("Profile", style: StyleClass.Red20style,),
+            child: Text("Profile", style: StyleClass.redstyle,),
           ),
           actions: [
-            GestureDetector(
-              onTap: () {
-                if(islogin==true) {
-                  _showAlertDialog(context,"Logout","Are you sure logout this app","1");
-                }
-                else
-                  {
-                    _showAlertDialog(context,"Login","Please Login ","2");
-                  }
-              },
-              child: Container(
-                  width: 30,
-                  height: 30,
-                  margin: EdgeInsets.only(right: 20),
-                  child: Icon(
-                    Icons.logout,
-                    color: GradientHelper.getColorFromHex(
-                        ColorClass.RED_COLOR),
-                  )),
-            ),
+            if(islogin==true)...
+              {
+                GestureDetector(
+                  onTap: () {
+                    if(islogin==true) {
+                      _showAlertDialog(context,"Logout","Are you sure logout this app","1");
+                    }
+
+                  },
+                  child: Container(
+                      width: 30,
+                      height: 30,
+                      margin: EdgeInsets.only(right: 20),
+                      child: Icon(
+                        Icons.logout,
+                        color: GradientHelper.getColorFromHex(
+                            ColorClass.RED_COLOR),
+                      )),
+                ),
+              }
           ]),
       body: Consumer<Updateprofileprovider>(
           builder: (context, loginProvider, child) {
             return Form(
               child: ListView(
+                shrinkWrap: true,
+
                 children: [
-                  Center(
-                    child: Container(
-                      child: Text("" + name, style: StyleClass.text17,),
-                    ),
-                  ),
-                  Center(
-                    child: Container(
-                      child: Text("" + email, style: StyleClass.blue14,),
-                    ),
-                  ),
-                  Stack(children: [
-                    Center(
-                      child: Container(
-                        height: 220,
-                        width: 180,
-                        margin: EdgeInsets.only(left: 5),
-                        child: CircleAvatar(
-                          backgroundImage: CachedNetworkImageProvider(
-                              "https://avatar.iran.liara.run/public/boy?username=Ash"),
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Container(
-                        height: 30,
-                        margin: EdgeInsets.only(left: 155, top: 60),
-                        color: GradientHelper.getColorFromHex(
-                            ColorClass.lightEditText),
-                        child: Image.asset(
-                          AppImages.edit_url, fit: BoxFit.cover,
-                          height: 30,
-                          width: 30,
-                        ),
-                      ),
-                    )
-                  ]),
-                  Container(
-                    margin: EdgeInsets.only(left: 40, right: 0),
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Row(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: GradientHelper.getColorFromHex(
-                                    ColorClass.lightEditText)
+                    if(islogin==true)...
+                      {
+                          Center(
+                            child: Container(
+                              child: Text("" + name, style: StyleClass.text17,),
                             ),
-                            width: 100,
-                            height: 70,
+                          ),
+                          Center(
+                            child: Container(
+                              child: Text("" + email, style: StyleClass.blue14,),
+                            ),
+                          ),
+                          Stack(children: [
+                            Center(
+                              child: Container(
+                                height: 220,
+                                width: 180,
+                                margin: EdgeInsets.only(left: 5),
+                                child: CircleAvatar(
+                                  backgroundImage: CachedNetworkImageProvider(
+                                      "https://avatar.iran.liara.run/public/boy?username=Ash"),
+                                ),
+                              ),
+                            ),
+                            Center(
+                              child: Container(
+                                height: 30,
+                                margin: EdgeInsets.only(left: 155, top: 60),
+                                color: GradientHelper.getColorFromHex(
+                                    ColorClass.lightEditText),
+                                child: Image.asset(
+                                  AppImages.edit_url, fit: BoxFit.cover,
+                                  height: 30,
+                                  width: 30,
+                                ),
+                              ),
+                            )
+                          ]),
+                          Container(
+                            margin: EdgeInsets.only(left: 40, right: 0),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Row(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: GradientHelper.getColorFromHex(
+                                            ColorClass.lightEditText)
+                                    ),
+                                    width: 100,
+                                    height: 70,
 
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 10.0),
-                                  child: Text("0", style: StyleClass.red14,),
-                                ),
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.amber,
-                                )
-                              ],
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 10.0),
+                                          child: Text("0", style: StyleClass.red14,),
+                                        ),
+                                        Icon(
+                                          Icons.star,
+                                          color: Colors.amber,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 100,
+                                    height: 70,
+                                    margin: EdgeInsets.only(left: 10),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: GradientHelper.getColorFromHex(
+                                            ColorClass.lightEditText)
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 10.0),
+                                          child: Text("0", style: StyleClass.red14,),
+                                        ),
+                                        Text("Review", style: StyleClass.blue14,),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 100,
+                                    height: 70,
+                                    margin: EdgeInsets.only(left: 10),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: GradientHelper.getColorFromHex(
+                                            ColorClass.lightEditText)
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 10.0),
+                                          child: Text("0", style: StyleClass.red14,),
+                                        ),
+                                        Text("Sold", style: StyleClass.blue14,),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                          Container(
-                            width: 100,
-                            height: 70,
-                            margin: EdgeInsets.only(left: 10),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: GradientHelper.getColorFromHex(
-                                    ColorClass.lightEditText)
-                            ),
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 10.0),
-                                  child: Text("0", style: StyleClass.red14,),
-                                ),
-                                Text("Review", style: StyleClass.blue14,),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            width: 100,
-                            height: 70,
-                            margin: EdgeInsets.only(left: 10),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: GradientHelper.getColorFromHex(
-                                    ColorClass.lightEditText)
-                            ),
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 10.0),
-                                  child: Text("0", style: StyleClass.red14,),
-                                ),
-                                Text("Sold", style: StyleClass.blue14,),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
 
-                  Container(
-                      margin: EdgeInsets.only(left: 20, right: 20, top: 10,),
-                      decoration: BoxDecoration(
-                        color: GradientHelper.getColorFromHex(
-                            ColorClass.lightEditText), // Light gray color
-                        borderRadius: BorderRadius.circular(
-                            8.0), // Optional: adds rounded corners
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 7),
-                        child: TextFormField(
-                          controller: nameController,
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                            hintText: ContentText.fullname,
-                            hintStyle: StyleClass.labelcolor14,
-                            border: InputBorder.none,
-                            prefixIcon: Icon(Icons.person, color: GradientHelper
-                                .getColorFromHex(
-                              ColorClass.blue,), size: 20,),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter a name';
-                            }
-                            return null;
-                          },
-                        ),
-                      )),
-                  //--------------email------------
-                  Container(
-                    margin: EdgeInsets.only(left: 20, right: 20, top: 10,),
-                    decoration: BoxDecoration(
-                      color: GradientHelper.getColorFromHex(
-                          ColorClass.lightEditText), // Light gray color
-                      borderRadius: BorderRadius.circular(
-                          8.0), // Optional: adds rounded corners
-                    ),
-                    child: Padding(
-                      padding:
-                      const EdgeInsets.symmetric(horizontal: 16.0, vertical: 7),
-                      child: TextFormField(
-                        enabled: false,
-                        controller: emailController,
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
-                          hintText: ContentText.email,
-                          hintStyle: StyleClass.labelcolor14,
-                          border: InputBorder.none,
-                          prefixIcon: Icon(Icons.email, color: GradientHelper
-                              .getColorFromHex(
-                            ColorClass.blue,), size: 20,),
-                          // Removes the default underline border
-                        ),
-                      ),
-                    ),
-                  ),
-                  //------------address-----------------
-                  Container(
-                      margin: EdgeInsets.only(
-                          left: 20, right: 20, top: 10, bottom: 10),
-                      decoration: BoxDecoration(
-                        color: GradientHelper.getColorFromHex(
-                            ColorClass.lightEditText), // Light gray color
-                        borderRadius: BorderRadius.circular(
-                            8.0), // Optional: adds rounded corners
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 7),
-                        child: TextFormField(
-                          controller: addressController,
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                            hintText: ContentText.add,
-                            hintStyle: StyleClass.labelcolor14,
-                            border: InputBorder.none,
-                            prefixIcon: Icon(Icons.location_on,
+                          Container(
+                              margin: EdgeInsets.only(left: 20, right: 20, top: 10,),
+                              decoration: BoxDecoration(
+                                color: GradientHelper.getColorFromHex(
+                                    ColorClass.lightEditText), // Light gray color
+                                borderRadius: BorderRadius.circular(
+                                    8.0), // Optional: adds rounded corners
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0, vertical: 7),
+                                child: TextFormField(
+                                  controller: nameController,
+                                  keyboardType: TextInputType.text,
+                                  decoration: InputDecoration(
+                                    hintText: ContentText.fullname,
+                                    hintStyle: StyleClass.labelcolor14,
+                                    border: InputBorder.none,
+                                    prefixIcon: Icon(Icons.person, color: GradientHelper
+                                        .getColorFromHex(
+                                      ColorClass.blue,), size: 20,),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter a name';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              )),
+                          //--------------email------------
+                          Container(
+                            margin: EdgeInsets.only(left: 20, right: 20, top: 10,),
+                            decoration: BoxDecoration(
                               color: GradientHelper.getColorFromHex(
-                                ColorClass.blue,), size: 20,),
+                                  ColorClass.lightEditText), // Light gray color
+                              borderRadius: BorderRadius.circular(
+                                  8.0), // Optional: adds rounded corners
+                            ),
+                            child: Padding(
+                              padding:
+                              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 7),
+                              child: TextFormField(
+                                enabled: false,
+                                controller: emailController,
+                                keyboardType: TextInputType.emailAddress,
+                                decoration: InputDecoration(
+                                  hintText: ContentText.email,
+                                  hintStyle: StyleClass.labelcolor14,
+                                  border: InputBorder.none,
+                                  prefixIcon: Icon(Icons.email, color: GradientHelper
+                                      .getColorFromHex(
+                                    ColorClass.blue,), size: 20,),
+                                  // Removes the default underline border
+                                ),
+                              ),
+                            ),
                           ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter address';
-                            }
-                            return null;
-                          },
-                        ),
-                      )),
-                  //------------city name ------------
+                          //------------address-----------------
+                          Container(
+                              margin: EdgeInsets.only(
+                                  left: 20, right: 20, top: 10, bottom: 10),
+                              decoration: BoxDecoration(
+                                color: GradientHelper.getColorFromHex(
+                                    ColorClass.lightEditText), // Light gray color
+                                borderRadius: BorderRadius.circular(
+                                    8.0), // Optional: adds rounded corners
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0, vertical: 7),
+                                child: TextFormField(
+                                  controller: addressController,
+                                  keyboardType: TextInputType.text,
+                                  decoration: InputDecoration(
+                                    hintText: ContentText.add,
+                                    hintStyle: StyleClass.labelcolor14,
+                                    border: InputBorder.none,
+                                    prefixIcon: Icon(Icons.location_on,
+                                      color: GradientHelper.getColorFromHex(
+                                        ColorClass.blue,), size: 20,),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter address';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              )),
+                          //------------city name ------------
 
-                  //-------------------update profile button --------------
-                  Container(
-                      height: 50,
-                      margin: EdgeInsets.only(
-                          left: 20, right: 20, bottom: 30, top: 10),
-                      decoration: BoxDecoration(
-                        color: GradientHelper.getColorFromHex(
-                            ColorClass.RED_COLOR),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: CustomButton(
-                          title: loginProvider.loading ? "" : "Update Profile",
-                          colors: GradientHelper.getColorFromHex(
-                              ColorClass.RED_COLOR))),
+                          //-------------------update profile button --------------
+                          Container(
+                              height: 50,
+                              margin: EdgeInsets.only(
+                                  left: 20, right: 20, bottom: 30, top: 10),
+                              decoration: BoxDecoration(
+                                color: GradientHelper.getColorFromHex(
+                                    ColorClass.RED_COLOR),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: CustomButton(
+                                  title: loginProvider.loading ? "" : "Update Profile",
+                                  colors: GradientHelper.getColorFromHex(
+                                      ColorClass.RED_COLOR), size: 14,)),
+                      }
+                    else...
+                      {
+                        Container(
+                          child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+
+                              Center(
+                                child: Image.asset(AppImages.nologin_url,
+                                  width: MediaQuery.of(context).size.width,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Padding(padding: EdgeInsets.all(10),child:
+                              Text("Please Login or SignUp",style: StyleClass.bluestyle,),),
+                              Container(
+                                  height: 50,
+                                  margin: EdgeInsets.only(
+                                      left: 20, right: 20, bottom: 30, top: 20),
+                                  decoration: BoxDecoration(
+                                    color: GradientHelper.getColorFromHex(
+                                        ColorClass.RED_COLOR),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: CustomButton(
+                                      title: loginProvider.loading ? "" : ContentText.login,
+                                      colors: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),
+                                    size: 14,
+                                  )),
+                            ],
+                          ),
+                        )
+                      }
                 ],
               ),
             );

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:realstateproject/Activity/Setting/UserProfile/ForgetPasswordPage.dart';
 import 'package:realstateproject/Activity/SignUpPage.dart';
 import 'package:realstateproject/Colors/ColorsClass.dart';
 import 'package:realstateproject/Colors/GradientHelper.dart';
@@ -10,6 +11,8 @@ import 'package:realstateproject/MutipleProvidersss/LoginProvider.dart';
 import 'package:realstateproject/Utils/ContentsText.dart';
 import 'package:realstateproject/Utils/StyleClass.dart';
 import 'package:realstateproject/Widgets/CustomButton.dart';
+import 'package:realstateproject/Widgets/CustomButton2.dart';
+import 'package:realstateproject/Widgets/CustomButton2.dart';
 import 'package:realstateproject/Widgets/PasswordFieldLogin.dart';
 class LoginPages extends StatefulWidget {
   const LoginPages({super.key});
@@ -60,7 +63,7 @@ class _LoginPagesState extends State<LoginPages> {
                   ),
                   //--------------email------------
                   Container(
-                    margin: EdgeInsets.all(10),
+                    margin: EdgeInsets.only(bottom: 10,right: 20,left: 20,top: 10),
                     decoration: BoxDecoration(
                       color: GradientHelper.getColorFromHex(ColorClass.lightEditText), // Light gray color
                       borderRadius: BorderRadius.circular(8.0), // Optional: adds rounded corners
@@ -82,9 +85,10 @@ class _LoginPagesState extends State<LoginPages> {
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           hintText: ContentText.email,
-                          hintStyle: StyleClass.textformstyle,
+                          hintStyle: StyleClass.labelcolor14,
                           border: InputBorder.none,
-                          prefixIcon: Icon(Icons.email),
+                          prefixIcon: Icon(Icons.email,color: GradientHelper.getColorFromHex(
+                            ColorClass.blue,), size: 20,),
                           // Removes the default underline border
                         ),
                       ),
@@ -93,29 +97,57 @@ class _LoginPagesState extends State<LoginPages> {
                   //------------password----
                   PasswordFieldLogin(),
                   //--------------------forget password----------------
-                  Align(
-                      alignment: Alignment.centerRight,
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(8.0,2.0,15.0,30),
-                        child: Text(ContentText.forgetpassword,style: StyleClass.text17,),
-                      )
+                  GestureDetector(
+                    onTap: (){
+
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (context, animation, secondaryAnimation) => Forgetpasswordpage(),
+                          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                            const begin = Offset(1.0, 0.0);
+                            const end = Offset.zero;
+                            const curve = Curves.easeInOut;
+
+                            var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                            var offsetAnimation = animation.drive(tween);
+
+                            return SlideTransition(
+                              position: offsetAnimation,
+                              child: child,
+                            );
+                          },
+                        ),
+                      );
+                    },
+                    child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(8.0,2.0,15.0,30),
+                          child: Text(ContentText.forgetpassword,style: StyleClass.text17,),
+                        )
+                    ),
                   ),
                   //-------------------login button --------------
                   Container(
                       height: 50,
-                      margin: EdgeInsets.all(10),
+                      margin: EdgeInsets.only(bottom: 10,right: 20,left: 20,top: 10),
                       decoration: BoxDecoration(
                         color: GradientHelper.getColorFromHex(ColorClass.RED_COLOR),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: CustomButton(
+                      child: CustomeButton2(
+                        onPressed: (){
+                          loginProvider.login(context);
+                        },
+
                         title: loginProvider.loading? "": "Login",
-                        colors: GradientHelper.getColorFromHex(ColorClass.RED_COLOR)
+                        colors: GradientHelper.getColorFromHex(ColorClass.RED_COLOR), size: 16, isLoading: loginProvider.loading,
                       )
                   ),
                   SizedBox(height: 20,),
                   Container(
-                    margin: EdgeInsets.all(10),
+                    margin: EdgeInsets.only(bottom: 10,right: 20,left: 20,top: 10),
                     child: Row(
                       children: [
                         Container(
@@ -215,8 +247,19 @@ class _LoginPagesState extends State<LoginPages> {
                     onTap: () async {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => RegistrationPage(), // Navigate to your main screen
+                        PageRouteBuilder(
+                          pageBuilder: (context, animation, secondaryAnimation) => RegistrationPage(),
+                          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                            const begin = Offset(1.0, 0.0);
+                            const end = Offset.zero;
+                            const curve = Curves.easeInOut;
+                            var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                            var offsetAnimation = animation.drive(tween);
+                            return SlideTransition(
+                              position: offsetAnimation,
+                              child: child,
+                            );
+                          },
                         ),
                       );
                     },

@@ -13,7 +13,7 @@ class PasswordField extends StatelessWidget {
     return Consumer<RegistrationProvider>(
       builder: (context, passwordVisibilityProvider, child) {
         return Container(
-          margin: const EdgeInsets.fromLTRB(10,5,10,10),
+          margin: const EdgeInsets.fromLTRB(20,5,20,10),
           decoration: BoxDecoration(
             color: GradientHelper.getColorFromHex(ColorClass.lightEditText), // Light gray color
             borderRadius: BorderRadius.circular(8.0), // Optional: adds rounded corners
@@ -32,11 +32,13 @@ class PasswordField extends StatelessWidget {
               controller: passwordVisibilityProvider.passwordController,
               decoration: InputDecoration(
                 hintText: ContentText.password,
-                hintStyle: StyleClass.textformstyle,
+                hintStyle: StyleClass.labelcolor14,
                 border: InputBorder.none,
-                prefixIcon: Icon(Icons.lock),
+                prefixIcon: Icon(Icons.lock,color: GradientHelper.getColorFromHex(
+                  ColorClass.blue,), size: 20,),
                 suffixIcon: IconButton(
-                  icon: Icon(passwordVisibilityProvider.isPasswordVisible ? Icons.visibility : Icons.visibility_off),
+                  icon: Icon(passwordVisibilityProvider.isPasswordVisible ? Icons.visibility : Icons.visibility_off,color: GradientHelper.getColorFromHex(
+                    ColorClass.blue,), size: 20,),
                   onPressed: () {
                     passwordVisibilityProvider.togglePasswordVisibility();
                   },
